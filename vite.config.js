@@ -8,7 +8,7 @@ const BASE_PATH = process.env.BASE_PATH || './';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/',
   plugins: [
     vue(),
     vueJsx(),
