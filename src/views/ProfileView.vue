@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import api from '../4bw-api'
+import api from '@/4bw-api'
 
 export default {
   props: {

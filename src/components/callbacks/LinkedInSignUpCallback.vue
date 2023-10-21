@@ -1,7 +1,7 @@
 <script>
 import {ref, onMounted, inject} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import api from '../../4bw-api'
+import api from '@/4bw-api'
 
 export default {
   name: "LinkedInSignUpCallback",
