@@ -1,4 +1,19 @@
+@font-face {
+  font-family: 'Orson';
+  src:  url('@/assets/fonts/SF-Orson-Casual-Heavy.woff') format('woff');
+  font-weight: bold;
+}
+
+:root {
+  --dark-natural: #6D4F3E;
+  --light-natural: #F0E3D0;
+  --dark-highlight: #5B2C21;
+  --light-highlight: #D0933F;
+  --dark-alt: #323F36;
+  --light-alt: #697550;
+}
+
 body {
+  background-color: var(--light-natural);
   min-height: 100vh;
-  padding: 10rem;
 }

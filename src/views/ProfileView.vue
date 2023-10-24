@@ -1,14 +1,19 @@
 <template>
   <div v-if="user">
     <img :src="user.profilePicture" alt="user.nameId"/>
-    <div class="h1">{{user.givenName}} {{user.familyName}}</div>
+    <div class="h1">{{ user.givenName }} {{ user.familyName }}</div>
+    <div class="row">
+      <AddressEditor :user-id="user.id"/>
+    </div>
   </div>
 </template>
 
 <script>
-import api from '@/4bw-api'
+import {api} from '@/4bw-api'
+import AddressEditor from "@/components/profile/AddressEditor.vue";
 
 export default {
+  components: {AddressEditor},
   props: {
     nameId: String
   },

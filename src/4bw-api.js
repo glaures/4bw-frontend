@@ -22,7 +22,7 @@ function init() {
     instance.defaults.baseURL = import.meta.env.VITE_4BW_API_URL
     window.console.log('4BW API base URL: ' + instance.defaults.baseURL)
     const authtoken = localStorage.getItem(AUTHTOKEN_LOCAL_STORAGE_KEY)
-    if(authtoken)
+    if (authtoken)
         setAuthtoken(authtoken)
 }
 
@@ -32,6 +32,10 @@ function setAuthtoken(authtoken) {
     instance.defaults.headers.common['Authorization'] = 'Bearer ' + authtoken
 }
 
+function getAuthtoken() {
+    return localStorage.getItem(AUTHTOKEN_LOCAL_STORAGE_KEY)
+}
+
 init();
 
-export default instance;
+export {instance as api, setAuthtoken, getAuthtoken};

@@ -1,43 +1,51 @@
-<script>
-import {ref, onMounted, inject} from "vue";
-import {useRoute, useRouter} from "vue-router";
-import api from '@/4bw-api'
-
-export default {
-  name: "LinkedInSignUpCallback",
-
-  setup() {
-    const route = useRoute();
-    const router = useRouter();
-    const loading = ref(true);
-    const error = ref(null);
-
-    function registerUser() {
-      loading.value = true;
-      api.post('/callbacks/linkedin', {code: route.query.code})
-          .then(res => {
-            router.push({name: 'profile', params: {nameId: res.data.nameId}})
-          }).catch(err => {
-        console.log('error: ' + JSON.stringify(err.response.data))
-      }).finally(() => loading.value = false)
-    }
-
-    onMounted(() => {
-      registerUser();
-    });
-
-    return {
-      loading,
-      error
-    };
-  }
-}
-</script>
-
 <template>
   <h1>Signing you up with your LinkedIn profile</h1>
   <span>{{ loading ? 'loading' : 'not loading' }}</span>
 </template>
+
+<script>
+import {api} from '@/4bw-api'
+import {authStore} from "@/stores/auth";
+import {mapActions, mapState} from "pinia";
+import {handleError} from '@/utils/notifications';
+
+export default {
+  name: "LinkedInSignUpCallback",
+
+  data() {
+    return {
+      loading: true,
+      error: undefined
+    }
+  },
+  computed: {
+    ...mapState(authStore, ['user'])
+  },
+  methods: {
+    ...mapActions(authStore, ['login']),
+    signInUser() {
+      this.loading = true;
+      api.post('/callbacks/linkedin', {code: this.$route.query.code})
+          .then(res => {
+            const authtoken = res.data
+            this.login(authtoken.id)
+          })
+          .catch(err => handleError(err))
+          .finally(() => this.loading = false)
+    }
+  },
+  watch: {
+    user(newVal, oldVal) {
+      if (newVal?.nameId) {
+        this.$router.push({name: 'profile', params: {nameId: newVal.nameId}})
+      }
+    }
+  },
+  mounted() {
+    this.signInUser();
+  }
+}
+</script>
 
 <style scoped>
 

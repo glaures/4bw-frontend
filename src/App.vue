@@ -1,74 +1,29 @@
 <script setup>
-import {RouterView } from 'vue-router'
+import {RouterView} from 'vue-router'
+import Navigation from "@/components/global/Navigation.vue";
 </script>
 
 <template>
   <header>
+    <Navigation/>
   </header>
-
-  <RouterView />
+  <RouterView/>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+<script>
+import {authStore} from "@/stores/auth";
+import {getAuthtoken} from "@/4bw-api";
+import {mapActions} from "pinia";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+export default {
+  methods: {
+    ...mapActions(authStore, ['login'])
+  },
+  mounted(){
+    const localStorageAuthtoken = getAuthtoken()
+    if(localStorageAuthtoken)
+      this.login(localStorageAuthtoken)
   }
 }
-</style>
+</script>
+
