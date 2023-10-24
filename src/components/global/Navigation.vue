@@ -12,10 +12,10 @@ export default {
 
 <template>
     <div class="navbar navbar-light sticky-top">
-      <a class="navbar-brand" href="#">4 Better Work</a>
-      <form v-if="!loggedIn" class="form-inline my-2 my-lg-0">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">{{$t('signUp')}}</button>
-      </form>
+      <a class="navbar-brand" href="/">4 Better Work</a>
+      <div v-if="!loggedIn" class="form-inline my-2 my-lg-0">
+        <button class="btn btn-outline-light btn-sm my-2 my-sm-0" @click="$router.push({name: 'signIn'})">{{$t('signUp')}}</button>
+      </div>
       <div v-if="user">
         <img class="rounded-circle shadow" height="40" :src="user.profilePicture" :alt="user.givenName + ' ' + user.familyName"/>
       </div>

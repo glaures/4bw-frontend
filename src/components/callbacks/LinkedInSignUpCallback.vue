@@ -37,7 +37,7 @@ export default {
   watch: {
     user(newVal, oldVal) {
       if (newVal?.nameId) {
-        this.$router.push({name: 'profile', params: {nameId: newVal.nameId}})
+        this.$router.push({name: 'home'})
       }
     }
   },
