@@ -1,19 +1,24 @@
 <template>
-  <div v-if="user">
+  <div class="container" v-if="user">
     <img :src="user.profilePicture" alt="user.nameId"/>
     <div class="h1">{{ user.givenName }} {{ user.familyName }}</div>
-    <div class="row">
+    <div>
       <AddressEditor :user-id="user.id"/>
+    </div>
+    <div class="mt-3">
+      <OffersList :user-id="user.id"/>
     </div>
   </div>
 </template>
 
 <script>
 import {api} from '@/4bw-api'
+import {handleError} from "@/utils/notifications";
 import AddressEditor from "@/components/profile/AddressEditor.vue";
+import OffersList from "@/components/profile/OffersList.vue";
 
 export default {
-  components: {AddressEditor},
+  components: {OffersList, AddressEditor},
   props: {
     nameId: String
   },
@@ -26,7 +31,7 @@ export default {
     loadUser() {
       api.get(`profiles/${this.nameId}`)
           .then(res => this.user = res.data)
-          .catch(err => console.log('err: ' + err.response.data))
+          .catch(err => handleError(err))
     }
   },
   activated() {

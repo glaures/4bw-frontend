@@ -13,13 +13,12 @@ export const authStore = defineStore('auth', {
         async login(authtoken) {
             this.authtoken = authtoken
             setAuthtoken(authtoken)
-            this.user = await api.get('/users', {
+            return await api.get('/users', {
                 params: {
                     authtoken: authtoken
                 }
             })
-                .then(res => res.data)
-                .catch(err => handleError(err))
+                .then(res => this.user = res.data)
         }
     },
     getters: {

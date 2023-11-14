@@ -1,8 +1,65 @@
+<template>
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-6">{{ $t('contact') }}</div>
+        <div v-if="!editMode" class="col-6 text-end">
+          <div class="btn btn-sm btn-primary" @click="editMode = !editMode">{{ $t('edit') }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div v-if="isEmpty && !editMode">
+        <div class="row text-muted  ">
+          {{ $t('noAddressYet') }}
+        </div>
+      </div>
+      <div v-if="!editMode && !isEmpty">
+        <div class="row">
+          <div class="col-12">{{ editedAddress.phone }}</div>
+        </div>
+        <div class="row">
+          <div class="col-12">{{ editedAddress.streetAndNumber }}</div>
+        </div>
+        <div class="row">
+          <div class="col-12">{{ editedAddress.zip }}&nbsp;{{ editedAddress.city }}</div>
+        </div>
+        <div class="row" v-if="$i18n.locale !== 'de'">
+          <div class="col-12">{{ editedAddress.state }}</div>
+        </div>
+        <div class="row">
+          <div class="col-12">{{ editedAddress.country }}</div>
+        </div>
+      </div>
+      <form @submit.prevent="submit" v-if="editMode">
+        <TextInput v-model="editedAddress.phone" label="phone" type="tel"
+                   autocomplete="tel"/>
+        <TextInput v-model="editedAddress.streetAndNumber" label="streetAndNumber" autocomplete="street-address"/>
+        <div class="d-flex">
+          <TextInput class="pe-2" v-model="editedAddress.zip" label="zip"
+                     autocomplete="postal-code"/>
+          <TextInput v-model="editedAddress.city" label="city" class="flex-fill"
+                     autocomplete="address-level2"/>
+        </div>
+        <TextInput v-model="editedAddress.country" label="country"/>
+        <div class="text-end">
+          <div class="btn btn-danger me-1" @click="editMode = false">{{$t('cancel')}}</div>
+          <button class="btn btn-primary" type="submit">{{$t('save')}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
 <script>
 import {api} from '@/4bw-api'
+import TextInput from "@/components/forms/TextInput.vue";
+import {handleError, showInfo} from "@/utils/notifications"
+import {Form} from "vee-validate"
 
 const emptyAddress = {
   id: null,
+  phone: '',
   streetAndNumber: '',
   zip: '',
   city: '',
@@ -11,6 +68,7 @@ const emptyAddress = {
 }
 export default {
   name: "AddressEditor",
+  components: {TextInput, Form},
   props: {
     id: String,
     userId: String
@@ -22,14 +80,23 @@ export default {
     }
   },
   computed: {
-    emptyAddress() {
+    isEmpty() {
       return !this.editedAddress?.id
     }
   },
   methods: {
     loadAddressByUserId(userId) {
-      api.get(`/users/${userId}/addresses`)
-          .then((res) => this.editedAddress = res.data)
+      api.get(`/users/${this.userId}/addresses`)
+          .then((res) => this.editedAddress = res.data || emptyAddress)
+    },
+    submit() {
+      api.post(`/users/${this.userId}/addresses`, this.editedAddress)
+          .then(res => {
+            this.editedAddress = res.data
+            this.editMode = false
+            showInfo(this.$t("contactInfoSaved"))
+          })
+          .catch(err => handleError(err))
     }
   },
   watch: {
@@ -44,57 +111,6 @@ export default {
 }
 </script>
 
-<template>
-  <div class="card">
-    <div class="card-header">
-      <div class="row">
-        <div class="col-6">{{ $t('address') }}</div>
-        <div v-if="!editMode" class="col-6 text-end">
-          <div class="btn btn-sm btn-primary" @click="editMode = !editMode">{{ $t('edit') }}</div>
-        </div>
-      </div>
-    </div>
-    <div class="card-body">
-      <div v-if="emptyAddress && !editMode">
-        <div class="row text-muted  ">
-          {{$t('noAddressYet')}}
-        </div>
-      </div>
-      <div v-if="!editMode && !emptyAddress">
-        <div class="row">
-          <div class="col-12">{{ editedAddress.streetAndNumber }}</div>
-        </div>
-        <div class="row">
-          <div class="col-12">{{ editedAddress.zip }}&nbsp;{{ editedAddress.city }}</div>
-        </div>
-        <div class="row" v-if="$i18n.locale !== 'de'">
-          <div class="col-12">{{ editedAddress.state }}</div>
-        </div>
-        <div class="row">
-          <div class="col-12">{{ editedAddress.country }}</div>
-        </div>
-      </div>
-      <div v-if="editMode">
-        <div class="row">
-          <label for="streetAndNumberInput">{{ $t('streetAndNumber') }}</label>
-          <input id="streetAndNumberInput" class="form-control form-text" v-model="editedAddress.streetAndNumber"/>
-        </div>
-        <div class="row">
-          <div class="col-6">{{ $t('zip') }}&nbsp;{{ $t('city') }}</div>
-          <div class="col-6">{{ editedAddress.zip }}&nbsp;{{ editedAddress.city }}</div>
-        </div>
-        <div class="row" v-if="$i18n.locale !== 'de'">
-          <div class="col-6">{{ $t('state') }}</div>
-          <div class="col-6">{{ editedAddress.state }}</div>
-        </div>
-        <div class="row">
-          <div class="col-6">{{ $t('country') }}</div>
-          <div class="col-6">{{ editedAddress.country }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
 
 <style scoped>
 

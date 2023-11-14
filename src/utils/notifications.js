@@ -22,19 +22,19 @@ function showMessage(message){
     }
 
 function showInfo(message) {
-      toast(message.message, {
+      toast(message, {
         type: 'info'
       })
     }
 
 function showError(message) {
-      toast(message.message, {
+      toast(message, {
         type: 'danger'
       })
     }
 
 function showWarning(message) {
-      toast(message.message, {
+      toast(message, {
         type: 'warning'
       })
     }

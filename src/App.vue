@@ -11,9 +11,9 @@ import Navigation from "@/components/global/Navigation.vue";
 </template>
 
 <script>
-import {authStore} from "@/stores/auth";
-import {getAuthtoken} from "@/4bw-api";
 import {mapActions} from "pinia";
+import {authStore} from "@/stores/auth";
+import {getAuthtoken, clearAuthtoken} from "@/4bw-api";
 
 export default {
   methods: {
@@ -21,8 +21,10 @@ export default {
   },
   mounted(){
     const localStorageAuthtoken = getAuthtoken()
-    if(localStorageAuthtoken)
+    if(localStorageAuthtoken) {
       this.login(localStorageAuthtoken)
+          .catch(clearAuthtoken)
+    }
   }
 }
 </script>

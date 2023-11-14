@@ -1,0 +1,29 @@
+:root {
+  --dark-natural: #123E49;
+  --light-natural: #F0E3D0;
+  --dark-highlight: #5B2C21;
+  --light-highlight: #D0933F;
+  --dark-alt: #323F36;
+  --light-alt: #697550;
+}
+
+$dark-natural: #123E49;
+$light-natural: #F0E3D0;
+$dark-highlight: #5B2C21;
+$light-highlight: #D0933F;
+$dark-alt: #323F36;
+$light-alt: #697550;
+
+$primary: $dark-natural;
+$success: $light-alt;
+$warning:       $light-highlight;
+$light: $light-natural;
+$dark:          $dark-highlight;
+
+body{
+  background-color: var(--light-natural);
+  min-height: 100vh;
+  font-family: Helvetica,Arial,sans-serif;
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap";

@@ -36,6 +36,10 @@ function getAuthtoken() {
     return localStorage.getItem(AUTHTOKEN_LOCAL_STORAGE_KEY)
 }
 
+function clearAuthtoken() {
+    localStorage.removeItem(AUTHTOKEN_LOCAL_STORAGE_KEY)
+}
+
 init();
 
-export {instance as api, setAuthtoken, getAuthtoken};
+export {instance as api, setAuthtoken, getAuthtoken, clearAuthtoken};
