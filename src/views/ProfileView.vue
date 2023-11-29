@@ -5,6 +5,9 @@
     <div>
       <AddressEditor :user-id="user.id"/>
     </div>
+    <div class="mt-2">
+      <SocialContactsEditor :user-id="user.id"/>
+    </div>
     <div class="mt-3">
       <OffersList :user-id="user.id"/>
     </div>
@@ -16,9 +19,10 @@ import {api} from '@/4bw-api'
 import {handleError} from "@/utils/notifications";
 import AddressEditor from "@/components/profile/AddressEditor.vue";
 import OffersList from "@/components/profile/OffersList.vue";
+import SocialContactsEditor from "@/components/profile/SocialContactsEditor.vue";
 
 export default {
-  components: {OffersList, AddressEditor},
+  components: {SocialContactsEditor, OffersList, AddressEditor},
   props: {
     nameId: String
   },

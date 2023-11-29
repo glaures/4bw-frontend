@@ -3,15 +3,12 @@
     <div class="card-header">
       <div class="row">
         <div class="col-6">{{ $t('contact') }}</div>
-        <div v-if="!editMode" class="col-6 text-end">
-          <div class="btn btn-sm btn-primary" @click="editMode = !editMode">{{ $t('edit') }}</div>
-        </div>
       </div>
     </div>
     <div class="card-body">
-      <div v-if="isEmpty && !editMode">
-        <div class="row text-muted  ">
-          {{ $t('noAddressYet') }}
+      <div v-if="isEmpty && !editMode" class="row text-muted">
+        <div class="col">
+          <span class="action-link" @click="editMode = true"><fa-icon icon="plus" class="me-1"/>{{ $t('addContactInformation') }}</span>
         </div>
       </div>
       <div v-if="!editMode && !isEmpty">
@@ -30,6 +27,7 @@
         <div class="row">
           <div class="col-12">{{ editedAddress.country }}</div>
         </div>
+        <span class="action-link small" @click="editMode = !editMode">{{ $t('edit') }}</span>
       </div>
       <form @submit.prevent="submit" v-if="editMode">
         <TextInput v-model="editedAddress.phone" label="phone" type="tel"
@@ -43,8 +41,8 @@
         </div>
         <TextInput v-model="editedAddress.country" label="country"/>
         <div class="text-end">
-          <div class="btn btn-danger me-1" @click="editMode = false">{{$t('cancel')}}</div>
-          <button class="btn btn-primary" type="submit">{{$t('save')}}</button>
+          <div class="btn btn-danger me-1" @click="editMode = false">{{ $t('cancel') }}</div>
+          <button class="btn btn-primary" type="submit">{{ $t('save') }}</button>
         </div>
       </form>
     </div>

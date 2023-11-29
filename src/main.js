@@ -10,11 +10,12 @@ import {Cloudinary} from "@cloudinary/url-gen";
 import Toast, {POSITION} from 'vue-toastification';
 import "vue-toastification/dist/index.css";
 import "@/utils/font-awesome"
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import "bootstrap"
 
 import '@/assets/main.scss'
 
-import { QuillEditor } from '@vueup/vue-quill'
+import {QuillEditor} from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const i18n = createI18n({
@@ -30,6 +31,7 @@ const cld = new Cloudinary({
 });
 
 const app = createApp(App);
+
 app.config.globalProperties.$cld = cld
 
 app.use(createPinia())

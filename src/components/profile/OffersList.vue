@@ -6,11 +6,6 @@
       </div>
     </div>
     <div class="card-body">
-      <div v-if="noOffersYet && !editMode">
-        <div class="text-muted  ">
-          {{ $t('noOffersYet') }}
-        </div>
-      </div>
       <div v-if="!noOffersYet && !editMode" class="list-group">
         <div v-for="offer in offers" class="list-group-item d-flex justify-content-between">
           <div>{{ offer.name }}</div>
@@ -24,8 +19,8 @@
           </div>
         </div>
       </div>
-      <div v-if="!editMode" class="mt-3">
-        <div class="btn btn-sm btn-primary" @click="editMode = !editMode">{{ $t('newOffer') }}</div>
+      <div v-if="!editMode" :class="{'mt-3': !noOffersYet}">
+        <span class="action-link" @click="editMode = !editMode"><fa-icon icon="plus" class="me-1"/>{{ $t('newOffer') }}</span>
       </div>
       <div v-if="editMode">
         <OfferEditor :offer="editedOffer" @save="save($event)" @cancel="cancelEdit"/>

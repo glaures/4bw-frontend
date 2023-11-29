@@ -7,6 +7,7 @@ export default {
         signInWithLinkedIn: 'Sign in with LinkedIn',
         edit: 'Edit',
         noAddressYet: 'You currently do not have an address associated to your account.',
+        addContactInformation: 'Add Contact Information',
         address: 'Address',
         contact: 'Contact',
         phone: 'Phone',
@@ -24,7 +25,11 @@ export default {
         offerName: 'Name',
         offerDescription: 'Description',
         offerDescriptionPlaceholder: 'Describe your offer in more detail here.',
-        newOffer: 'Define new Offer'
+        newOffer: 'Add Offer',
+        socialNetworks: 'Social Networks',
+        choose: 'Choose',
+        addProfile: 'Add Profile',
+        socialContactDeleted: '{0} profile information has been deleted.'
     },
     de: {
         signUp: 'Registrieren',
@@ -33,6 +38,7 @@ export default {
         delete: 'Löschen',
         signInWithLinkedIn: "Mit LinkedIn anmelden",
         noAddressYet: 'Du hast aktuell noch keine Adressdaten angegeben.',
+        addContactInformation: 'Kontaktinformationen hinzufügen',
         edit: 'Bearbeiten',
         address: 'Adresse',
         contact: 'Kontakt',
@@ -51,6 +57,10 @@ export default {
         offerName: 'Bezeichnung',
         offerDescription: 'Beschreibung',
         offerDescriptionPlaceholder: 'Beschreibe Dein Angebot hier im Detail.',
-        newOffer: 'Neues Angebot'
+        newOffer: 'Angebot hinzufügen',
+        socialNetworks: 'Soziale Netzwerke',
+        choose: 'Wählen',
+        addProfile: 'Profil hinzufügen',
+        socialContactDeleted: 'Information zu {0} Profil gelöscht.'
     }
 }

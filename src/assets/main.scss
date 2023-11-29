@@ -1,29 +1,41 @@
 :root {
-  --dark-natural: #123E49;
-  --light-natural: #F0E3D0;
-  --dark-highlight: #5B2C21;
-  --light-highlight: #D0933F;
-  --dark-alt: #323F36;
-  --light-alt: #697550;
+  --primary: #123e49;
+  --info: #009fb7;
+  --success: #17b890;
+  --warning: #FB8B24;
+  --danger: #c20950;
+  --light: #faf3dd;
+  --dark: #123e49;
 }
 
-$dark-natural: #123E49;
-$light-natural: #F0E3D0;
-$dark-highlight: #5B2C21;
-$light-highlight: #D0933F;
-$dark-alt: #323F36;
-$light-alt: #697550;
+$primary: #123e49;
+$info: #009fb7;
+$success: #17b890;
+$warning: #FB8B24;
+$danger: #c20950;
+$light: #faf3dd;
+$dark: #123e49;
 
-$primary: $dark-natural;
-$success: $light-alt;
-$warning:       $light-highlight;
-$light: $light-natural;
-$dark:          $dark-highlight;
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 body{
-  background-color: var(--light-natural);
+  background-color: white;
   min-height: 100vh;
   font-family: Helvetica,Arial,sans-serif;
 }
 
-@import "../../node_modules/bootstrap/scss/bootstrap";
+.action-link {
+  @extend .text-info;
+  @extend .fs-6;
+  @extend .p-1;
+  cursor: pointer;
+}
+
+.action-link:hover {
+  @extend .bg-secondary;
+  @extend .bg-opacity-10;
+}
+
+.action-link.small {
+  font-size: small!important;
+}

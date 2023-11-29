@@ -1,6 +1,18 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faCross, faPen, faXmark} from '@fortawesome/free-solid-svg-icons'
+import {faPen, faXmark, faCircleMinus, faCirclePlus, faPlus, faTrashCan} from '@fortawesome/free-solid-svg-icons'
+import {faFacebook, faInstagram, faXTwitter, faTiktok, faLinkedin, faXing} from '@fortawesome/free-brands-svg-icons'
 
 library.add(faXmark)
 library.add(faPen)
+library.add(faCircleMinus)
+library.add(faCirclePlus)
+library.add(faPlus)
+library.add(faTrashCan)
+
+library.add(faFacebook)
+library.add(faInstagram)
+library.add(faTiktok)
+library.add(faXTwitter)
+library.add(faLinkedin)
+library.add(faXing)
 

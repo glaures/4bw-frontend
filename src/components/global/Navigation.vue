@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <div class="navbar navbar-light sticky-top shadow">
+  <div class="navbar navbar-light sticky-top shadow" v-if="$route.name !== 'homepage'">
     <a class="navbar-brand" href="/">
       <img src="@/assets/img/4bw-logo.svg" alt="Logo" height="32">
     </a>
@@ -34,7 +34,7 @@ export default {
   width: 100vw;
   padding: 0.2rem 1.0rem;
   margin-bottom: 1.0rem;
-  background-color: var(--dark-natural);
+  background-color: var(--dark);
 }
 
 .navbar-brand {
