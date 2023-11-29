@@ -1,8 +1,17 @@
 <template>
   <div class="container" v-if="user">
-    <img :src="user.profilePicture" alt="user.nameId"/>
-    <div class="h1">{{ user.givenName }} {{ user.familyName }}</div>
-    <div>
+    <div class="d-flex justify-content-start">
+      <div>
+        <img :src="user.profilePicture" alt="user.nameId" class="img-fluid rounded-circle shadow"/>
+      </div>
+      <div class="flex-fill ms-1 ms-lg-2">
+        <div class="fs-3">{{ user.givenName }} {{ user.familyName }}</div>
+        <div class="mt-2">
+          <AboutEditor :user-id="user.id"/>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3">
       <AddressEditor :user-id="user.id"/>
     </div>
     <div class="mt-2">
@@ -20,9 +29,10 @@ import {handleError} from "@/utils/notifications";
 import AddressEditor from "@/components/profile/AddressEditor.vue";
 import OffersList from "@/components/profile/OffersList.vue";
 import SocialContactsEditor from "@/components/profile/SocialContactsEditor.vue";
+import AboutEditor from "@/components/profile/AboutEditor.vue";
 
 export default {
-  components: {SocialContactsEditor, OffersList, AddressEditor},
+  components: {AboutEditor, SocialContactsEditor, OffersList, AddressEditor},
   props: {
     nameId: String
   },

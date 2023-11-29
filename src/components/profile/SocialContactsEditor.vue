@@ -2,13 +2,13 @@
   <div v-if="userId" class="card">
     <div class="card-header">{{ $t('socialNetworks') }}</div>
     <div class="card-body">
-      <div class="input-group input-group-text mb-3" id="basic-addon1" v-for="(socialContact, idx) in socialContacts"
+      <div class="input-group mb-3" v-for="(socialContact, idx) in socialContacts"
            :key="socialContact.id">
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" :id="'dropdown' + idx"
+        <div class="dropdown col-2 mt-auto text-end">
+          <button class="btn h-100 dropdown-toggle" type="button" :id="'dropdown' + idx"
                   data-bs-toggle="dropdown" aria-expanded="false">
-            <fa-icon v-if="socialContact.socialNetwork" :icon="'fab fa-' + socialContact.socialNetwork.faIcon"/>
-            <span v-else>{{ $t('choose') }}</span>
+            <fa-icon v-if="socialContact.socialNetwork" :icon="'fab fa-' + socialContact.socialNetwork.faIcon" size="lg"/>
+            <fa-icon v-else class="text-muted" icon="question" size="lg">{{ $t('choose') }}</fa-icon>
           </button>
           <ul class="dropdown-menu px-1 w-100" :aria-labelledby="'dropdown' + idx">
             <li v-for="sn in unusedSocialNetworks" class="dropdown-item" style="cursor: pointer" href="#"
@@ -18,11 +18,18 @@
             </li>
           </ul>
         </div>
-        <span>{{ socialContact.socialNetwork ? socialContact.socialNetwork.profileUrlPrefix : '' }}</span>
-        <input :id="'accountInput_' + idx" type="text" class="form-control" v-model="socialContact.account"
-               v-debounce="accountInput">
-        <fa-icon icon="trash-can" class="btn btn-sm" @click="deleteContact(socialContact)"></fa-icon>
-        ´
+        <div class="col-9">
+          <label :for="'#accountInput_' + idx" class="text-muted small">{{
+              socialContact.socialNetwork ? socialContact.socialNetwork.profileUrlPrefix : ''
+            }}</label>
+          <div class="d-flex">
+            <input :id="'accountInput_' + idx" type="text" class="form-control" v-model="socialContact.account"
+                   v-debounce="accountInput"/>
+          </div>
+        </div>
+        <div class="col-1 mt-auto pb-1">
+          <fa-icon icon="trash-can" class="text-danger ms-2" size="lg" @click="deleteContact(socialContact)"/>
+        </div>
       </div>
       <div>
         <span class="action-link" @click="addContact"><fa-icon icon="fa-plus"

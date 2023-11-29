@@ -29,7 +29,11 @@ export default {
         socialNetworks: 'Social Networks',
         choose: 'Choose',
         addProfile: 'Add Profile',
-        socialContactDeleted: '{0} profile information has been deleted.'
+        socialContactDeleted: '{0} profile information has been deleted.',
+        website: 'Website',
+        editAbout: 'Edit details',
+        headline: 'Headline',
+        about: 'About you'
     },
     de: {
         signUp: 'Registrieren',
@@ -61,6 +65,10 @@ export default {
         socialNetworks: 'Soziale Netzwerke',
         choose: 'Wählen',
         addProfile: 'Profil hinzufügen',
-        socialContactDeleted: 'Information zu {0} Profil gelöscht.'
+        socialContactDeleted: 'Information zu {0} Profil gelöscht.',
+        website: 'Webseite',
+        editAbout: 'Details bearbeiten',
+        headline: 'Profil-Slogan',
+        about: 'Über Dich'
     }
 }

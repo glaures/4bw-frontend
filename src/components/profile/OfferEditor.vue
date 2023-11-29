@@ -1,15 +1,25 @@
 <template>
-  <form @submit:prevent="$emit('save', editedOffer)">
-    <TextInput v-model="editedOffer.name" :label="$t('offerName')"/>
-    <label for="#offerDescriptionEditor">{{ $t('offerDescription') }}</label>
-    <QuillEditor :placeholder="$t('offerDescriptionPlaceholder')"
-                 v-model:content="editedOffer.description"
-                 contentType="html"/>
-    <div class="text-end mt-3">
-      <div class="btn btn-danger" @click="$emit('cancel')">{{ $t('cancel') }}</div>
-      <div class="btn btn-primary ms-1" @click="$emit('save', editedOffer)">{{ $t('save') }}</div>
+  <div class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <TextInput v-model="editedOffer.name" label="offerName"/>
+          <label for="#offerDescriptionEditor">{{ $t('offerDescription') }}</label>
+          <QuillEditor :placeholder="$t('offerDescriptionPlaceholder')"
+                       v-model:content="editedOffer.description"
+                       contentType="html"
+                       style="min-height: 30vh; max-height: 30vh; overflow: scroll;"/>
+        </div>
+        <div class="modal-footer">
+          <div class="btn btn-danger" data-bs-dismiss="modal">{{ $t('cancel') }}</div>
+          <div class="btn btn-primary ms-1" data-bs-dismiss="modal" @click="$emit('save', editedOffer)">{{
+              $t('save')
+            }}
+          </div>
+        </div>
+      </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -36,10 +46,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.editorWrapper {
-  min-height: 180px;
-  height: 180px;
-  max-height: 180px;
-}
-</style>

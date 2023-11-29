@@ -6,12 +6,15 @@
       </div>
     </div>
     <div class="card-body">
-      <div v-if="isEmpty && !editMode" class="row text-muted">
+      <div v-if="isEmpty" class="row text-muted">
         <div class="col">
-          <span class="action-link" @click="editMode = true"><fa-icon icon="plus" class="me-1"/>{{ $t('addContactInformation') }}</span>
+          <span class="action-link" data-bs-toggle="modal" data-bs-target="#addressEditorModal"><fa-icon icon="plus"
+                                                                                                         class="me-1"/>{{
+              $t('addContactInformation')
+            }}</span>
         </div>
       </div>
-      <div v-if="!editMode && !isEmpty">
+      <div v-else>
         <div class="row">
           <div class="col-12">{{ editedAddress.phone }}</div>
         </div>
@@ -27,24 +30,33 @@
         <div class="row">
           <div class="col-12">{{ editedAddress.country }}</div>
         </div>
-        <span class="action-link small" @click="editMode = !editMode">{{ $t('edit') }}</span>
+        <span class="action-link small" data-bs-toggle="modal" data-bs-target="#addressEditorModal">{{
+            $t('edit')
+          }}</span>
       </div>
-      <form @submit.prevent="submit" v-if="editMode">
-        <TextInput v-model="editedAddress.phone" label="phone" type="tel"
-                   autocomplete="tel"/>
-        <TextInput v-model="editedAddress.streetAndNumber" label="streetAndNumber" autocomplete="street-address"/>
-        <div class="d-flex">
-          <TextInput class="pe-2" v-model="editedAddress.zip" label="zip"
-                     autocomplete="postal-code"/>
-          <TextInput v-model="editedAddress.city" label="city" class="flex-fill"
-                     autocomplete="address-level2"/>
+      <div class="modal fade" tabindex="-1" id="addressEditorModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <TextInput v-model="editedAddress.phone" label="phone" type="tel"
+                         autocomplete="tel"/>
+              <TextInput v-model="editedAddress.streetAndNumber" label="streetAndNumber"
+                         autocomplete="street-address"/>
+              <div class="d-flex">
+                <TextInput class="pe-2" v-model="editedAddress.zip" label="zip"
+                           autocomplete="postal-code"/>
+                <TextInput v-model="editedAddress.city" label="city" class="flex-fill"
+                           autocomplete="address-level2"/>
+              </div>
+              <TextInput v-model="editedAddress.country" label="country"/>
+            </div>
+            <div class="modal-footer">
+              <div class="btn btn-danger me-1" data-bs-dismiss="modal">{{ $t('cancel') }}</div>
+              <button class="btn btn-primary" data-bs-dismiss="modal" @click="submit">{{ $t('save') }}</button>
+            </div>
+          </div>
         </div>
-        <TextInput v-model="editedAddress.country" label="country"/>
-        <div class="text-end">
-          <div class="btn btn-danger me-1" @click="editMode = false">{{ $t('cancel') }}</div>
-          <button class="btn btn-primary" type="submit">{{ $t('save') }}</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>

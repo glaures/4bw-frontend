@@ -6,25 +6,25 @@
       </div>
     </div>
     <div class="card-body">
-      <div v-if="!noOffersYet && !editMode" class="list-group">
+      <div v-if="!noOffersYet" class="list-group">
         <div v-for="offer in offers" class="list-group-item d-flex justify-content-between">
           <div>{{ offer.name }}</div>
           <div>
             <div class="btn btn-danger btn-sm" @click="remove(offer.id)" :aria-label="$t('delete')">
-              <fa-icon icon="fa-xmark"/>
+              <fa-icon icon="trash-can"/>
             </div>
-            <div class="btn btn-primary btn-sm ms-1" @click="edit(offer)" :aria-label="$t('edit')">
+            <div class="btn btn-primary btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#offerEditor" @click="edit(offer)" :aria-label="$t('edit')">
               <fa-icon icon="fa-pen"/>
             </div>
           </div>
         </div>
       </div>
-      <div v-if="!editMode" :class="{'mt-3': !noOffersYet}">
-        <span class="action-link" @click="editMode = !editMode"><fa-icon icon="plus" class="me-1"/>{{ $t('newOffer') }}</span>
+      <div :class="{'mt-3': !noOffersYet}">
+        <span class="action-link" data-bs-toggle="modal" data-bs-target="#offerEditor">
+          <fa-icon icon="plus" class="me-1"/>{{ $t('newOffer') }}
+        </span>
       </div>
-      <div v-if="editMode">
-        <OfferEditor :offer="editedOffer" @save="save($event)" @cancel="cancelEdit"/>
-      </div>
+      <OfferEditor id="offerEditor" :offer="editedOffer" @save="save($event)"/>
     </div>
   </div>
 </template>
@@ -47,8 +47,7 @@ export default {
   data() {
     return {
       offers: [],
-      editedOffer: {...emptyOffer},
-      editMode: false
+      editedOffer: {...emptyOffer}
     }
   },
   computed: {
@@ -65,7 +64,6 @@ export default {
       const method = this.editedOffer.id ? 'put' : 'post'
       api[method](`/users/${this.userId}/offers`, this.editedOffer)
           .then(res => {
-            this.editMode = false
             this.loadOffers()
           })
           .catch(err => handleError(err))
@@ -73,23 +71,17 @@ export default {
     remove(offerId) {
       api.delete(`/users/${this.userId}/offers/${offerId}`)
           .then(res => {
-            this.editMode = false
             showInfo(this.$t('offerDeleted'))
             this.loadOffers()
           })
           .catch(err => handleError(err))
     },
-    edit(offer){
+    edit(offer) {
       this.editedOffer = offer
-      this.editMode = true
     },
     save(offer) {
       this.editedOffer = offer
       this.submit()
-    },
-    cancelEdit() {
-      this.editedOffer = {...emptyOffer}
-      this.editMode = false
     }
   },
   watch: {
