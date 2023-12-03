@@ -9,6 +9,10 @@
                        v-model:content="editedOffer.description"
                        contentType="html"
                        style="min-height: 30vh; max-height: 30vh; overflow: scroll;"/>
+          <div class="mt-3">
+            <label for="#languagesSelector">{{$t('offerLanguages')}}</label>
+            <LanguageSelector class="mt-1" v-model="editedOffer.languages"/>
+          </div>
         </div>
         <div class="modal-footer">
           <div class="btn btn-danger" data-bs-dismiss="modal">{{ $t('cancel') }}</div>
@@ -24,16 +28,17 @@
 
 <script>
 import TextInput from "@/components/forms/TextInput.vue";
+import LanguageSelector from "@/components/language/LanguageSelector.vue";
 
 export default {
-  components: {TextInput},
+  components: {LanguageSelector, TextInput},
   props: {
     offer: Object
   },
   emits: ['save', 'cancel'],
   data() {
     return {
-      editedOffer: {},
+      editedOffer: {}
     }
   },
   watch: {

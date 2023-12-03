@@ -25,6 +25,7 @@ export default {
         offerName: 'Name',
         offerDescription: 'Description',
         offerDescriptionPlaceholder: 'Describe your offer in more detail here.',
+        offerLanguages: 'Offer Languages',
         newOffer: 'Add Offer',
         socialNetworks: 'Social Networks',
         choose: 'Choose',
@@ -61,6 +62,7 @@ export default {
         offerName: 'Bezeichnung',
         offerDescription: 'Beschreibung',
         offerDescriptionPlaceholder: 'Beschreibe Dein Angebot hier im Detail.',
+        offerLanguages: 'Angebotene Sprachen',
         newOffer: 'Angebot hinzufügen',
         socialNetworks: 'Soziale Netzwerke',
         choose: 'Wählen',
@@ -69,6 +71,6 @@ export default {
         website: 'Webseite',
         editAbout: 'Details bearbeiten',
         headline: 'Profil-Slogan',
-        about: 'Über Dich'
+        about: 'Über Dich',
     }
 }
