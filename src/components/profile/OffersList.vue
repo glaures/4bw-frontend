@@ -20,7 +20,7 @@
         </div>
       </div>
       <div :class="{'mt-3': !noOffersYet}">
-        <span class="action-link" data-bs-toggle="modal" data-bs-target="#offerEditor">
+        <span class="action-link" data-bs-toggle="modal" data-bs-target="#offerEditor" @click="clearEditedOffer">
           <fa-icon icon="plus" class="me-1"/>{{ $t('newOffer') }}
         </span>
       </div>
@@ -35,8 +35,10 @@ import OfferEditor from "@/components/profile/OfferEditor.vue";
 import {handleError, showInfo} from "@/utils/notifications";
 
 const emptyOffer = {
+  id: null,
   name: '',
-  description: ''
+  description: '',
+  languages: []
 }
 export default {
   name: "OffersList",
@@ -82,6 +84,9 @@ export default {
     save(offer) {
       this.editedOffer = offer
       this.submit()
+    },
+    clearEditedOffer(){
+      this.editedOffer = emptyOffer
     }
   },
   watch: {

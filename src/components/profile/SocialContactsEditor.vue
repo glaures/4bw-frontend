@@ -7,7 +7,8 @@
         <div class="dropdown col-2 mt-auto text-end">
           <button class="btn h-100 dropdown-toggle" type="button" :id="'dropdown' + idx"
                   data-bs-toggle="dropdown" aria-expanded="false">
-            <fa-icon v-if="socialContact.socialNetwork" :icon="'fab fa-' + socialContact.socialNetwork.faIcon" size="lg"/>
+            <fa-icon v-if="socialContact.socialNetwork" :icon="'fab fa-' + socialContact.socialNetwork.faIcon"
+                     size="lg"/>
             <fa-icon v-else class="text-muted" icon="question" size="lg">{{ $t('choose') }}</fa-icon>
           </button>
           <ul class="dropdown-menu px-1 w-100" :aria-labelledby="'dropdown' + idx">
@@ -18,17 +19,21 @@
             </li>
           </ul>
         </div>
-        <div class="col-9">
+        <div class="col-8">
           <label :for="'#accountInput_' + idx" class="text-muted small">{{
               socialContact.socialNetwork ? socialContact.socialNetwork.profileUrlPrefix : ''
             }}</label>
           <div class="d-flex">
-            <input :id="'accountInput_' + idx" type="text" class="form-control" v-model="socialContact.account"
-                   v-debounce="accountInput"/>
+            <input :id="'accountInput_' + idx" type="text" class="form-control" v-model="socialContact.account"/>
           </div>
         </div>
-        <div class="col-1 mt-auto pb-1">
-          <fa-icon icon="trash-can" class="text-danger ms-2" size="lg" @click="deleteContact(socialContact)"/>
+        <div class="col-2 mt-auto ps-1 d-flex">
+          <div class="btn btn-danger btn-sm">
+            <fa-icon icon="trash-can" @click="deleteContact(socialContact)"/>
+          </div>
+          <div class="btn btn-primary btn-sm ms-1">
+            <fa-icon icon="check" @click="saveContact(socialContact)"/>
+          </div>
         </div>
       </div>
       <div>
@@ -49,7 +54,7 @@ export default {
   name: "SocialContactsEditor",
   components: {TextInput},
   directives: {
-    debounce: vue3Debounce({lock: true})
+    debounce: vue3Debounce({lock: false})
   },
   props: {
     userId: String
@@ -72,10 +77,12 @@ export default {
       })
     },
     saveContact(socialContact) {
-      console.log(socialContact)
       if (socialContact.account && socialContact.socialNetwork)
         api.post(`/users/${this.userId}/social`, socialContact)
-            .then(res => this.socialContacts = res.data)
+            .then(res => {
+              this.socialContacts = res.data
+              showInfo(this.$t(`socialContactSaved`, [socialContact.socialNetwork.name]))
+            })
             .catch(err => handleError(err))
     },
     deleteContact(socialContact) {
@@ -85,10 +92,6 @@ export default {
             this.socialContacts = res.data
             showInfo(this.$t('socialContactDeleted', [socialNetworkName]))
           }).catch(err => handleError(err))
-    },
-    accountInput(input, event) {
-      const editedContact = this.socialContacts[event.target.id.split('_')[1]]
-      this.saveContact(editedContact)
     },
     networkInput(idx, n) {
       this.socialContacts[idx].socialNetwork = n

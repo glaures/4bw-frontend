@@ -5,7 +5,8 @@
         <div class="modal-body">
           <TextInput v-model="editedOffer.name" label="offerName"/>
           <label for="#offerDescriptionEditor">{{ $t('offerDescription') }}</label>
-          <QuillEditor :placeholder="$t('offerDescriptionPlaceholder')"
+          <QuillEditor ref="quill"
+                       :placeholder="$t('offerDescriptionPlaceholder')"
                        v-model:content="editedOffer.description"
                        contentType="html"
                        style="min-height: 30vh; max-height: 30vh; overflow: scroll;"/>
@@ -45,6 +46,8 @@ export default {
     offer: {
       handler(newVal, oldVal) {
         this.editedOffer = {...newVal}
+        if(newVal && !this.editedOffer.description)
+          this.editedOffer.description = '<p></p>'
       },
       immediate: true
     },

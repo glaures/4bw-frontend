@@ -1,7 +1,7 @@
 <template>
   <div class="input-group d-flex">
     <div v-for="(l, idx) in availableLanguages" :key="l.id" class="me-3 mb-1">
-      <input class="form-check-inline" type="checkbox" @click="select(l, $event)" :value="checkStates[idx]"/>
+      <input class="form-check-inline" type="checkbox" @click="select(l, $event)" :checked="checkStates[idx]"/>
       <AdvancedImage :cld-img="$cld.image('web/languages/' + l.iso)" height="23"/>
     </div>
   </div>
@@ -43,7 +43,8 @@ export default {
   watch: {
     modelValue: {
       handler(newVal) {
-        this.checkStates = this.availableLanguages.map(al => newVal.find(l => l.id === al.id) !== undefined)
+        if (newVal)
+          this.checkStates = this.availableLanguages.map(al => newVal.find(l => l.id === al.id) !== undefined)
       },
       immediate: true
     }
