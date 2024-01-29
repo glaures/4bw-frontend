@@ -1,15 +1,3 @@
-<script>
-import {mapState} from "pinia";
-import {authStore} from '@/stores/auth'
-
-export default {
-  name: "Navigation",
-  computed: {
-    ...mapState(authStore, ['loggedIn', 'user']),
-  }
-}
-</script>
-
 <template>
   <div class="main-gradient navbar navbar-light sticky-top shadow" v-if="$route.name !== 'homepage'">
     <a class="navbar-brand" href="/">
@@ -22,12 +10,26 @@ export default {
     </div>
     <div v-else>
       <router-link :to="{name: 'profile', params: {nameId: user.nameId}}">
-        <img class="rounded-circle shadow" height="40" :src="user.profilePicture"
+        <AdvancedImage class="rounded-circle shadow" height="40" :cld-img="$cld.image(user.profilePicture)"
              :alt="user.givenName + ' ' + user.familyName"/>
       </router-link>
     </div>
   </div>
 </template>
+
+<script>
+import {mapState} from "pinia";
+import {authStore} from '@/stores/auth'
+import {AdvancedImage} from "@cloudinary/vue";
+
+export default {
+  name: "Navigation",
+  components: {AdvancedImage},
+  computed: {
+    ...mapState(authStore, ['loggedIn', 'user']),
+  }
+}
+</script>
 
 <style scoped>
 .navbar {

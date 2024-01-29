@@ -2,7 +2,7 @@
   <div class="container" v-if="user">
     <div class="d-flex justify-content-start">
       <div>
-        <img :src="user.profilePicture" :alt="user.familyName" class="img-fluid rounded-circle shadow"/>
+        <AdvancedImage :cld-img="$cld.image(user.profilePicture)" height="30" :alt="user.familyName" class="img-fluid rounded-circle shadow"/>
       </div>
       <div class="flex-fill ms-1 ms-lg-2">
         <div class="h1">{{ user.givenName }} {{ user.familyName }}</div>
@@ -53,9 +53,12 @@ import SocialContactsEditor from "@/components/profile/SocialContactsEditor.vue"
 import AboutEditor from "@/components/profile/AboutEditor.vue";
 import LanguageSelector from "@/components/language/LanguageSelector.vue";
 import CategorySelector from "@/components/category/CategorySelector.vue";
+import {AdvancedImage} from "@cloudinary/vue";
 
 export default {
-  components: {CategorySelector, LanguageSelector, AboutEditor, SocialContactsEditor, OffersList, AddressEditor},
+  components: {
+    AdvancedImage,
+    CategorySelector, LanguageSelector, AboutEditor, SocialContactsEditor, OffersList, AddressEditor},
   props: {
     nameId: String
   },
