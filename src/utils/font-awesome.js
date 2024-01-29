@@ -6,7 +6,7 @@ import {
     faCirclePlus,
     faPlus,
     faTrashCan,
-    faQuestion, faCheck
+    faQuestion, faCheck, faCircleXmark
 } from '@fortawesome/free-solid-svg-icons'
 import {faFacebook, faInstagram, faXTwitter, faTiktok, faLinkedin, faXing} from '@fortawesome/free-brands-svg-icons'
 
@@ -14,6 +14,7 @@ library.add(faXmark)
 library.add(faPen)
 library.add(faCircleMinus)
 library.add(faCirclePlus)
+library.add(faCircleXmark)
 library.add(faPlus)
 library.add(faTrashCan)
 library.add(faQuestion)

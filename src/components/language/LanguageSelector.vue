@@ -1,8 +1,15 @@
 <template>
-  <div class="input-group d-flex">
-    <div v-for="(l, idx) in availableLanguages" :key="l.id" class="me-3 mb-1">
-      <input class="form-check-inline" type="checkbox" @click="select(l, $event)" :checked="checkStates[idx]"/>
-      <AdvancedImage :cld-img="$cld.image('web/languages/' + l.iso)" height="23"/>
+  <div>
+    <div class="row">
+      <div v-for="(l, idx) in availableLanguages" :key="l.id" class="col-md-6 col-3 me-3 mb-1">
+        <input class="form-check-input me-1" type="checkbox" @click="select(l, $event)" :checked="checkStates[idx]"
+               :selected="checkStates[idx]"/>
+        <AdvancedImage :cld-img="$cld.image('web/languages/' + l.iso)" height="23" class="me-1"/>
+        <span class="form-check-label">{{ $t('language_' + l.iso) }}</span>
+      </div>
+    </div>
+    <div class="d-flex mt-3 justify-content-end">
+      <button class="btn btn-primary" data-bs-dismiss="modal">{{ $t('ok') }}</button>
     </div>
   </div>
 </template>
@@ -25,12 +32,17 @@ export default {
       checkStates: []
     }
   },
-  computed: {},
+  computed: {
+    initialized(){
+      return this.modelValue && this.availableLanguages
+    }
+  },
   methods: {
     loadAvailableLanguages() {
       api.get('/configuration/languages')
           .then(res => {
             this.availableLanguages = res.data
+            this.updateCheckStates()
           })
           .catch(err => handleError(err))
     },
@@ -38,15 +50,15 @@ export default {
       this.checkStates[this.availableLanguages.indexOf(language)] = event.target.checked
       this.$emit('update:modelValue', this.availableLanguages
           .filter(al => this.checkStates[this.availableLanguages.indexOf(al)] === true))
+    },
+    updateCheckStates() {
+      if (this.initialized)
+        this.checkStates = this.availableLanguages.map(al => this.modelValue.find(l => l.id === al.id) !== undefined)
     }
   },
   watch: {
-    modelValue: {
-      handler(newVal) {
-        if (newVal)
-          this.checkStates = this.availableLanguages.map(al => newVal.find(l => l.id === al.id) !== undefined)
-      },
-      immediate: true
+    modelValue() {
+      this.updateCheckStates()
     }
   },
   mounted() {

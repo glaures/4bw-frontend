@@ -3,66 +3,67 @@ const API_ERROR = 'Die 4 Better Work Website hat ein technisches Problem bei der
     'Sollte das Problem dadurch nicht behoben sein, kontaktiere uns bitte telefonisch!'
 const INT_ERROR = 'Es ist ein unerwarteter Fehler aufgetreten. Bitte kontaktiere uns über das Kontaktformular oder telefonisch!'
 
-import { useToast, TYPE } from 'vue-toastification'
+import {useToast, TYPE} from 'vue-toastification'
 
-const toast= useToast()
+const toast = useToast()
 
-function showMessage(message){
-      if (message != null) {
+function showMessage(message) {
+    if (message != null) {
         let type;
         type = TYPE.SUCCESS;
         if (message.type === 'danger')
-          type = TYPE.ERROR
+            type = TYPE.ERROR
         if (message.type === 'warning')
-          type = TYPE.WARNING
+            type = TYPE.WARNING
         toast(message.message, {
-          type: type
+            type: type
         })
-      }
     }
+}
 
 function showInfo(message) {
-      toast(message, {
+    toast(message, {
         type: 'info'
-      })
-    }
+    })
+}
 
 function showError(message) {
-      toast(message, {
+    toast(message, {
         type: 'danger'
-      })
-    }
+    })
+}
 
 function showWarning(message) {
-      toast(message, {
+    toast(message, {
         type: 'warning'
-      })
-    }
+    })
+}
 
 function handleError(err, silent) {
-      let msg = ''
-      let type = 'danger'
-      if (err.response) {
+    let msg = ''
+    let type = 'danger'
+    if (err.response) {
         // client received an error response (5xx, 4xx)
         msg = err.response.data
         if (msg?.message)
-          msg = msg.message
+            msg = msg.message
         else
-          msg = INT_ERROR
+            msg = INT_ERROR
         if (err.response.status < 500)
-          type = 'warning'
-      } else if (err.request) {
+            type = 'warning'
+    } else if (err.request) {
         // client never received a response, or request never left
         msg = API_ERROR
-      } else {
+    } else {
         // anything else
         msg = INT_ERROR
-      }
-      if (!silent)
-        toast(msg, {
-          type: type
+    }
+    if (!silent)
+        showMessage({
+            message: msg,
+            type: type
         })
-  }
+}
 
 
 export {showMessage, showError, showInfo, showWarning, handleError}

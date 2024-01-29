@@ -4,7 +4,7 @@ import Navigation from "@/components/global/Navigation.vue";
 </script>
 
 <template>
-  <header>
+  <header class="sticky-top">
     <Navigation/>
   </header>
   <RouterView/>

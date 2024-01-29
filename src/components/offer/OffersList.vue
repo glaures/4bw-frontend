@@ -13,25 +13,29 @@
             <div class="btn btn-danger btn-sm" @click="remove(offer.id)" :aria-label="$t('delete')">
               <fa-icon icon="trash-can"/>
             </div>
-            <div class="btn btn-primary btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#offerEditor" @click="edit(offer)" :aria-label="$t('edit')">
+            <div class="btn btn-primary btn-sm ms-1"
+                 @click="edit(offer)" :aria-label="$t('edit')">
               <fa-icon icon="fa-pen"/>
             </div>
           </div>
         </div>
       </div>
-      <div :class="{'mt-3': !noOffersYet}">
-        <span class="action-link" data-bs-toggle="modal" data-bs-target="#offerEditor" @click="clearEditedOffer">
+      <div v-else class="text-secondary">
+        {{ $t('helpOffersList') }}
+      </div>
+      <div class="mt-2">
+        <span class="action-link" @click="newOffer">
           <fa-icon icon="plus" class="me-1"/>{{ $t('newOffer') }}
         </span>
       </div>
-      <OfferEditor id="offerEditor" :offer="editedOffer" @save="save($event)"/>
     </div>
+
   </div>
 </template>
 
 <script>
 import {api} from '@/4bw-api'
-import OfferEditor from "@/components/profile/OfferEditor.vue";
+import OfferEditor from "@/components/offer/OfferEditor.vue";
 import {handleError, showInfo} from "@/utils/notifications";
 
 const emptyOffer = {
@@ -79,14 +83,14 @@ export default {
           .catch(err => handleError(err))
     },
     edit(offer) {
-      this.editedOffer = offer
+      this.$router.push({name: 'editOffer', params: {offerId: offer.id}})
     },
     save(offer) {
       this.editedOffer = offer
       this.submit()
     },
-    clearEditedOffer(){
-      this.editedOffer = emptyOffer
+    newOffer() {
+      this.$router.push({name: 'editOffer'})
     }
   },
   watch: {

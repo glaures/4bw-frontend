@@ -11,9 +11,9 @@ export default {
 </script>
 
 <template>
-  <div class="navbar navbar-light sticky-top shadow" v-if="$route.name !== 'homepage'">
+  <div class="main-gradient navbar navbar-light sticky-top shadow" v-if="$route.name !== 'homepage'">
     <a class="navbar-brand" href="/">
-      <img src="@/assets/img/4bw-logo.svg" alt="Logo" height="32">
+      <img src="@/assets/img/4bw-logo.svg" alt="Logo" height="23">
     </a>
     <div v-if="!loggedIn" class="form-inline my-2 my-lg-0">
       <button class="btn btn-outline-light btn-sm my-2 my-sm-0" @click="$router.push({name: 'signIn'})">
@@ -32,6 +32,7 @@ export default {
 <style scoped>
 .navbar {
   width: 100vw;
+  height: 90px;
   padding: 0.2rem 1.0rem;
   margin-bottom: 1.0rem;
   background-color: var(--dark);

@@ -4,6 +4,7 @@ import LinkedInSignUpCallback from "@/components/callbacks/LinkedInSignUpCallbac
 import ProfileView from "@/views/ProfileView.vue";
 import HomeView from "@/views/HomeView.vue"
 import HomePageView from "@/views/HomePageView.vue";
+import EditOfferView from "@/views/EditOfferView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,12 @@ const router = createRouter({
       name: 'profile',
       props: true,
       component: ProfileView
+    },
+    {
+      path: '/offers/:offerId?',
+      name: 'editOffer',
+      props: true,
+      component: EditOfferView
     },
     {
       path: '/h/:nameId',
