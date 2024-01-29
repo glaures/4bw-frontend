@@ -2,7 +2,7 @@
   <div class="container" v-if="user">
     <div class="d-flex justify-content-start">
       <div>
-        <AdvancedImage :cld-img="$cld.image(user.profilePicture)" height="30" :alt="user.familyName" class="img-fluid rounded-circle shadow"/>
+        <AdvancedImage :cld-img="$cld.image(user.profilePicture)" :height="80" :alt="user.familyName" class="rounded-circle shadow"/>
       </div>
       <div class="flex-fill ms-1 ms-lg-2">
         <div class="h1">{{ user.givenName }} {{ user.familyName }}</div>

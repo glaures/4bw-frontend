@@ -17,7 +17,7 @@ export default {
   <h1>Sign Up</h1>
   <a class="btn btn-light"
        :href="'https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=8677vx0nctt8kd&redirect_uri=' + redirectUrl + '&state=foobar&scope=openid%20profile%20email'">
-    <AdvancedImage :cld-img="linkedInIcon" height="30"/>
+    <AdvancedImage :cld-img="linkedInIcon" :height="30"/>
     <span class="ms-2">{{$t('signInWithLinkedIn')}}</span>
   </a>
 </template>
