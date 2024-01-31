@@ -28,7 +28,7 @@ export default {
       api.post('/callbacks/linkedin', {code: this.$route.query.code})
           .then(res => {
             const authtoken = res.data
-            this.login(authtoken.id)
+            this.login(authtoken)
           })
           .catch(err => handleError(err))
           .finally(() => this.loading = false)
