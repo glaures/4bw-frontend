@@ -12,7 +12,8 @@ instance.interceptors.response.use(originalResponse => {
 
 instance.interceptors.response.use((response) => response, (error) => {
     if (error?.response && error.response.status === 401) {
-        setAuthtoken(null)
+        console.error(error.response.data)
+        clearAuthtoken()
     }
     return Promise.reject(error)
 });
