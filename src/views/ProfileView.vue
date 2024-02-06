@@ -78,7 +78,7 @@ export default {
           .catch(err => handleError(err))
     },
     updateUserCompetencies() {
-      api.post(`profiles/${this.nameId}/competencies`, this.competencies)
+      api.post(`profiles/${this.user.id}/competencies`, this.competencies)
     }
   },
   activated() {

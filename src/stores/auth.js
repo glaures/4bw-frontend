@@ -15,6 +15,7 @@ export const authStore = defineStore('auth', {
             setAuthtoken(authtoken)
             return await api.get('/users/me')
                 .then(res => this.user = res.data)
+                .catch(err => handleError(err))
         }
     },
     getters: {

@@ -14,6 +14,7 @@ import Navigation from "@/components/global/Navigation.vue";
 import {mapActions} from "pinia";
 import {authStore} from "@/stores/auth";
 import {getAuthtoken, clearAuthtoken} from "@/4bw-api";
+import {handleError} from "@/utils/notifications";
 
 export default {
   methods: {
@@ -23,7 +24,7 @@ export default {
     const localStorageAuthtoken = getAuthtoken()
     if(localStorageAuthtoken) {
       this.login(localStorageAuthtoken)
-          .catch(clearAuthtoken)
+          .catch(err => handleError(err))
     }
   }
 }

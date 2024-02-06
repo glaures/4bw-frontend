@@ -37,6 +37,7 @@ function getAuthtoken() {
 }
 
 function clearAuthtoken() {
+    console.log('clearing token')
     localStorage.removeItem(AUTHTOKEN_LOCAL_STORAGE_KEY)
 }
 
