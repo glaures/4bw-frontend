@@ -6,17 +6,19 @@
       </div>
       <div class="mt-4 row">
         <div class="col-6 col-md-3" v-for="user in foundUsers" :key="user.id">
-          <div class="card">
-            <div class="card-header">
-              <AdvancedImage :cld-img="$cld.image(user.profilePicture)" :height="30" :alt="user.familyName"
-                             class="rounded-circle shadow">
-              </AdvancedImage>
-              {{ user.givenName + ' ' + user.familyName }}
+          <router-link :to="{name: 'supplierDetail', params: {id: user.id}}">
+            <div class="card">
+              <div class="card-header">
+                <AdvancedImage :cld-img="$cld.image(user.profilePicture)" :height="30" :alt="user.familyName"
+                               class="rounded-circle shadow">
+                </AdvancedImage>
+                {{ user.givenName + ' ' + user.familyName }}
+              </div>
+              <div class="card-body">
+                Lorem ipsum ...
+              </div>
             </div>
-            <div class="card-body">
-              Lorem ipsum ...
-            </div>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>

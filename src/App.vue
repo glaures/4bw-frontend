@@ -7,7 +7,9 @@ import Navigation from "@/components/global/Navigation.vue";
   <header class="sticky-top">
     <Navigation/>
   </header>
-  <RouterView/>
+  <div class="container">
+    <RouterView/>
+  </div>
 </template>
 
 <script>
@@ -20,9 +22,9 @@ export default {
   methods: {
     ...mapActions(authStore, ['login'])
   },
-  mounted(){
+  mounted() {
     const localStorageAuthtoken = getAuthtoken()
-    if(localStorageAuthtoken) {
+    if (localStorageAuthtoken) {
       this.login(localStorageAuthtoken)
           .catch(err => handleError(err))
     }
