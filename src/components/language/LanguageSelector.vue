@@ -49,11 +49,13 @@ export default {
     select(language, event) {
       this.checkStates[this.availableLanguages.indexOf(language)] = event.target.checked
       this.$emit('update:modelValue', this.availableLanguages
-          .filter(al => this.checkStates[this.availableLanguages.indexOf(al)] === true))
+          .filter(al => this.checkStates[this.availableLanguages.indexOf(al)] === true)
+          .map(l => l.iso))
+
     },
     updateCheckStates() {
       if (this.initialized)
-        this.checkStates = this.availableLanguages.map(al => this.modelValue.find(l => l.id === al.id) !== undefined)
+        this.checkStates = this.availableLanguages.map(al => this.modelValue.find(l => l === al.iso) !== undefined)
     }
   },
   watch: {

@@ -53,10 +53,12 @@ export default {
         editAbout: 'Edit details',
         headline: 'Headline',
         about: 'About you',
+        aboutMe: 'About me',
         addCompetence: 'Add competence',
         editCompetencies: 'Edit competencies',
         competenceSelectorPlaceholder: 'e.g. Project Management, Transformation Coaching, ...',
-        add: 'Add'
+        add: 'Add',
+        userDescription: 'Title, position, description'
     },
     de: {
         language_de: 'Deutsch',
@@ -112,9 +114,11 @@ export default {
         editAbout: 'Details bearbeiten',
         headline: 'Profil-Slogan',
         about: 'Über Dich',
+        aboutMe: 'Über mich',
         addCompetence: 'Kompetenz hinzufügen',
         editCompetencies: 'Kompetenzen bearbeiten',
         competenceSelectorPlaceholder: 'z.B. Projekt Management, Transformation Management, ...',
-        add: 'Hinzufügen'
+        add: 'Hinzufügen',
+        userDescription: 'Titel, Position, Beschreibung'
     }
 }

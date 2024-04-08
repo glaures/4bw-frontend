@@ -26,15 +26,6 @@
         }}
       </div>
     </div>
-    <div id="languageSelectorModal" class="modal fade" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <LanguageSelector class="mt-1" v-model="editedOffer.languages"/>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 

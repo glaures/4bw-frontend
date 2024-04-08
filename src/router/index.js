@@ -3,7 +3,6 @@ import SignUpView from "@/views/SignUpView.vue";
 import LinkedInSignUpCallback from "@/components/callbacks/LinkedInSignUpCallback.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import HomeView from "@/views/HomeView.vue"
-import HomePageView from "@/views/HomePageView.vue";
 import EditOfferView from "@/views/EditOfferView.vue";
 import LoginView from "@/views/LoginView.vue";
 import RegistrationTypeSelectionView from "@/views/RegistrationTypeSelectionView.vue";
@@ -51,12 +50,6 @@ const router = createRouter({
       name: 'editOffer',
       props: true,
       component: EditOfferView
-    },
-    {
-      path: '/h/:nameId',
-      name: 'homepage',
-      props: true,
-      component: HomePageView
     },
     {
       path: '/login',

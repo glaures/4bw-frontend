@@ -12,8 +12,34 @@
         <div class="modal-content">
           <div class="modal-body">
             <div>
+              <TextInput v-model="about.description" label="userDescription"/>
               <TextInput v-model="about.website" label="website"/>
               <TextInput v-model="about.headline" label="headline"/>
+              <div>
+                <label for="#languagesSelectorModel">{{ $t('offerLanguages') }}</label>
+                <div class="d-flex">
+                  <div v-for="l in about.languages"
+                       :key="about.id + '_' + l.iso">
+                    <AdvancedImage :cld-img="$cld.image('web/languages/' + l.iso)" height="16" class="me-1"/>
+                  </div>
+                  <div data-bs-toggle="modal" data-bs-target="#languageSelectorModal">
+                    <span class="action-link">+</span>
+                  </div>
+                </div>
+                <div id="languageSelectorModal" class="modal fade" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <LanguageSelector class="mt-1" v-model="about.languages"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="aboutTextArea" class="form-label">{{ $t('aboutMe') }}</label>
+                <textarea id="aboutTextArea" rows="10" class="form-control" v-model="about.about"/>
+              </div>
               <div class="text-end">
                 <button class="btn btn-danger" data-bs-dismiss="modal">{{ $t('cancel') }}</button>
                 <button class="btn btn-primary ms-1" data-bs-dismiss="modal" @click="save">{{ $t('save') }}</button>
@@ -30,17 +56,21 @@
 import TextInput from "@/components/forms/TextInput.vue";
 import {api} from "@/4bw-api";
 import {handleError} from "@/utils/notifications";
+import LanguageSelector from "@/components/language/LanguageSelector.vue";
 
 export default {
   name: "AboutEditor",
-  components: {TextInput},
+  components: {LanguageSelector, TextInput},
   props: {
     userId: String
   },
   data() {
     return {
       about: {
-        website: null
+        website: null,
+        headline: null,
+        about: null,
+        languages: []
       }
     }
   },

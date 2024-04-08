@@ -4,10 +4,10 @@ import Navigation from "@/components/global/Navigation.vue";
 </script>
 
 <template>
-  <header class="sticky-top">
+  <header v-if="$route.name !== 'publicHome'" class="sticky-top">
     <Navigation/>
   </header>
-  <div class="container">
+  <div>
     <RouterView/>
   </div>
 </template>
