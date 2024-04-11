@@ -58,7 +58,8 @@ export default {
         editCompetencies: 'Edit competencies',
         competenceSelectorPlaceholder: 'e.g. Project Management, Transformation Coaching, ...',
         add: 'Add',
-        userDescription: 'Title, position, description'
+        userDescription: 'Title, position, description',
+        describeProblem: 'Describe the problem you have in your organization.'
     },
     de: {
         language_de: 'Deutsch',
@@ -119,6 +120,8 @@ export default {
         editCompetencies: 'Kompetenzen bearbeiten',
         competenceSelectorPlaceholder: 'z.B. Projekt Management, Transformation Management, ...',
         add: 'Hinzufügen',
-        userDescription: 'Titel, Position, Beschreibung'
+        userDescription: 'Titel, Position, Beschreibung',
+        describeProblem: 'Beschreibe das Problem, das Du in Deiner Organisation hast.\nDie 4BetterWork-KI schlägt Dir dann Trainings vor.'
+
     }
 }
