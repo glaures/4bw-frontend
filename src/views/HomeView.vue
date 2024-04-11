@@ -74,7 +74,7 @@ export default {
         },
         autoresize(){
             this.$refs.aiPrompt.style.height = 'auto';
-            this.$refs.aiPrompt.style.height = this.scrollHeight + 'px';
+            this.$refs.aiPrompt.style.height = this.$refs.aiPrompt.scrollHeight + 'px';
         }
     },
     watch: {
