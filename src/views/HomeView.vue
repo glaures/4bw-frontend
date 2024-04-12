@@ -65,7 +65,7 @@ export default {
         async searchWithAi() {
             this.isLoading = true;
             this.aiResponse = ''
-            api.post('/recommendations', this.aiPrompt)
+            api.post('/recommendations', {prompt: this.aiPrompt})
                 .then(res => this.aiResponse = res.data)
                 .catch(err => handleError(err))
                 .finally(() => {
