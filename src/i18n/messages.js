@@ -59,7 +59,8 @@ export default {
         competenceSelectorPlaceholder: 'e.g. Project Management, Transformation Coaching, ...',
         add: 'Add',
         userDescription: 'Title, position, description',
-        describeProblem: 'Describe the problem you have in your organization.'
+        describeProblem: 'Describe the problem you have in your organization.',
+        editLanguages: 'Edit languages'
     },
     de: {
         language_de: 'Deutsch',
@@ -121,7 +122,7 @@ export default {
         competenceSelectorPlaceholder: 'z.B. Projekt Management, Transformation Management, ...',
         add: 'Hinzufügen',
         userDescription: 'Titel, Position, Beschreibung',
-        describeProblem: 'Beschreibe das Problem, das Du in Deiner Organisation hast.\nDie 4BetterWork-KI schlägt Dir dann Trainings vor.'
-
+        describeProblem: 'Beschreibe das Problem, das Du in Deiner Organisation hast.\nDie 4BetterWork-KI schlägt Dir dann Trainings vor.',
+        editLanguages: 'Sprachen bearbeiten'
     }
 }
