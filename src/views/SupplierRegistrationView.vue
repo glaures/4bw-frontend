@@ -7,7 +7,7 @@ export default {
 <template>
   <div class="h1">{{ $route.name }}</div>
   <div>
-    <router-link :to="{name: 'profile'}">Trainer registriert</router-link>
+    <router-link :to="{name: 'editProfile'}">Trainer registriert</router-link>
   </div>
 </template>
 

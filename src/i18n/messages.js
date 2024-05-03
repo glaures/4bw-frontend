@@ -60,7 +60,10 @@ export default {
         add: 'Add',
         userDescription: 'Title, position, description',
         describeProblem: 'Describe the problem you have in your organization.',
-        editLanguages: 'Edit languages'
+        editLanguages: 'Edit languages',
+        editProfile: 'Edit profile',
+        viewPublicHome: 'View public home page',
+        logout: 'Sign out'
     },
     de: {
         language_de: 'Deutsch',
@@ -123,6 +126,9 @@ export default {
         add: 'Hinzufügen',
         userDescription: 'Titel, Position, Beschreibung',
         describeProblem: 'Beschreibe das Problem, das Du in Deiner Organisation hast.\nDie 4BetterWork-KI schlägt Dir dann Trainings vor.',
-        editLanguages: 'Sprachen bearbeiten'
+        editLanguages: 'Sprachen bearbeiten',
+        editProfile: 'Profil bearbeiten',
+        viewPublicHome: 'Öffentliche Homepage bearbeiten',
+        logout: 'Abmelden'
     }
 }

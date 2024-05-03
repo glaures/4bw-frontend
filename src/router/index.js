@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import {authStore} from "@/stores/auth";
 import SignUpView from "@/views/SignUpView.vue";
 import LinkedInSignUpCallback from "@/components/callbacks/LinkedInSignUpCallback.vue";
-import ProfileView from "@/views/ProfileView.vue";
+import ProfileEditView from "@/views/ProfileEditView.vue";
 import HomeView from "@/views/HomeView.vue"
 import EditOfferView from "@/views/EditOfferView.vue";
 import LoginView from "@/views/LoginView.vue";
@@ -35,9 +36,9 @@ const router = createRouter({
     },
     {
       path: '/profiles/:nameId',
-      name: 'profile',
+      name: 'editProfile',
       props: true,
-      component: ProfileView
+      component: ProfileEditView
     },
     {
       path: '/h/:nameId',
@@ -117,5 +118,19 @@ const router = createRouter({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.name === 'editProfile') {
+    const loggedUser = authStore().user
+    console.log('authStore.user: ' + loggedUser)
+    if (!loggedUser || to.params.nameId !== loggedUser.nameId) {
+      next({ path: '/' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 
 export default router

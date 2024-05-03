@@ -5,7 +5,7 @@
                 <input class="form-check-input me-1" type="checkbox" @click="select(l, $event)"
                        :checked="checkStates[idx]"
                        :selected="checkStates[idx]"/>
-                <AdvancedImage :cld-img="$cld.image('web/languages/' + l.iso)" height="23" class="me-1"/>
+                <LanguageFlag :language="l" :height="23" class="me-1"/>
                 <span class="form-check-label">{{ $t('language_' + l.iso) }}</span>
             </div>
         </div>
@@ -19,10 +19,11 @@
 import {api} from "@/4bw-api";
 import {handleError} from "@/utils/notifications";
 import {AdvancedImage} from "@cloudinary/vue";
+import LanguageFlag from "@/components/language/LanguageFlag.vue";
 
 export default {
     name: "LanguageSelector",
-    components: {AdvancedImage},
+    components: {LanguageFlag, AdvancedImage},
     emits: ['update:modelValue'],
     props: {
         modelValue: Array

@@ -2,11 +2,12 @@
 import LiteYouTubeEmbed from 'vue-lite-youtube-embed'
 import 'vue-lite-youtube-embed/style.css'
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import LanguageFlag from "@/components/language/LanguageFlag.vue";
 </script>
 
 <template>
   <main v-if="homeData">
-    <div>
+    <div class="container">
       <div class="button-bar-top main-gradient p-2 shadow">
         <button class="btn btn-sm btn-outline-light">Kontakt</button>
         <button class="btn btn-sm btn-outline-light">Verfügbarkeit</button>
@@ -50,7 +51,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
       <div class="offers-panel mt-5 px-4" v-if="homeData.offers">
         <div class="h1">Mein Angebot</div>
         <div class="row mt-4">
-          <div class="col-6" v-for="offer in homeData.offers" :key="offer.id">
+          <div class="col-12 col-md-6" v-for="offer in homeData.offers" :key="offer.id">
             <div class="h5">{{ offer.name }}</div>
             <div class="mt-2 offer-description" style="
                    text-overflow: ellipsis;"><span v-html="offer.description"/></div>
@@ -60,10 +61,12 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
       <div class="skills-panel main-gradient mt-5 text-white p-5">
         <div class="h1 mb-3">Kompetenzen</div>
         <div v-for="competence in homeData.competencies">{{ competence.nameDE }}</div>
-        <div class="h1 mt-5">Qualifikationen</div>
-        <div v-for="competence in homeData.competencies">{{ competence.nameDE }}</div>
         <div class="h1 mt-5">Sprachen</div>
-        <div v-for="language in homeData.languages">{{ language }}</div>
+        <div class="d-flex">
+          <language-flag  v-for="language in homeData.about.languages"
+                          :key="'lang_flag_' + language.iso"
+                          :language="language" class="me-1"/>
+        </div>
       </div>
     </div>
   </main>
@@ -86,7 +89,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
       <div class="btn btn-sm btn-primary" @click="saveSettings">Speichern</div>
     </div>
     <div class="text-end mt-2">
-      <router-link :to="{name: 'profile', params: {nameId: this.nameId}}">Profil-Einstellungen</router-link>
+      <router-link :to="{name: 'editProfile', params: {nameId: this.nameId}}">Profil-Einstellungen</router-link>
     </div>
   </div>
 </template>

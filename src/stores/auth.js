@@ -1,4 +1,4 @@
-import {api, setAuthtoken} from '@/4bw-api'
+import {api, clearAuthtoken, setAuthtoken} from '@/4bw-api'
 import {defineStore} from "pinia";
 import {handleError} from '@/utils/notifications'
 
@@ -16,6 +16,11 @@ export const authStore = defineStore('auth', {
             return await api.get('/users/me')
                 .then(res => this.user = res.data)
                 .catch(err => handleError(err))
+        },
+        async logout(){
+            this.authtoken = null
+            clearAuthtoken()
+            this.user = null
         }
     },
     getters: {
@@ -24,3 +29,4 @@ export const authStore = defineStore('auth', {
         }
     }
 })
+
