@@ -16,6 +16,8 @@ $danger: #C2095A;
 $light: #faf3dd;
 $dark: #123e49;
 
+$btn-primary-color: var(--light);
+
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 body{
