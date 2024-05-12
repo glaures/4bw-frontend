@@ -54,6 +54,7 @@ export default {
         headline: 'Headline',
         about: 'About you',
         aboutMe: 'About me',
+        competencies: 'competencies',
         addCompetence: 'Add competence',
         editCompetencies: 'Edit competencies',
         competenceSelectorPlaceholder: 'e.g. Project Management, Transformation Coaching, ...',
@@ -63,7 +64,14 @@ export default {
         editLanguages: 'Edit languages',
         editProfile: 'Edit profile',
         viewPublicHome: 'View public home page',
-        logout: 'Sign out'
+        logout: 'Sign out',
+        certificatesAndLicenses: 'Certificates & Licenses',
+        addCertification: 'Add certification',
+        certificationName: 'Name of certification or license',
+        issuer: 'Issuer',
+        issuedDate: 'Date issued',
+        expirationDate: 'Expires',
+        email: 'Email'
     },
     de: {
         language_de: 'Deutsch',
@@ -120,6 +128,7 @@ export default {
         headline: 'Profil-Slogan',
         about: 'Über Dich',
         aboutMe: 'Über mich',
+        competencies: 'Kompetenzen',
         addCompetence: 'Kompetenz hinzufügen',
         editCompetencies: 'Kompetenzen bearbeiten',
         competenceSelectorPlaceholder: 'z.B. Projekt Management, Transformation Management, ...',
@@ -129,6 +138,13 @@ export default {
         editLanguages: 'Sprachen bearbeiten',
         editProfile: 'Profil bearbeiten',
         viewPublicHome: 'Öffentliche Homepage bearbeiten',
-        logout: 'Abmelden'
+        logout: 'Abmelden',
+        certificatesAndLicenses: 'Zertifikate und Lizenzen',
+        addCertification: 'Zertifikat hinzufügen',
+        certificationName: 'Zertifikats- oder Lizenzname',
+        issuer: 'Herausgeber',
+        issuedDate: 'Ausgabedatum',
+        expirationDate: 'Läuft ab',
+        email: 'Email'
     }
 }

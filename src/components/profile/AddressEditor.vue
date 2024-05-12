@@ -16,6 +16,9 @@
       </div>
       <div v-else>
         <div class="row">
+          <div class="col-12">{{ editedAddress.email }}</div>
+        </div>
+        <div class="row">
           <div class="col-12">{{ editedAddress.phone }}</div>
         </div>
         <div class="row">
@@ -38,6 +41,8 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body">
+              <TextInput v-model="editedAddress.email" label="email" type="email"
+                         autocomplete="email"/>
               <TextInput v-model="editedAddress.phone" label="phone" type="tel"
                          autocomplete="tel"/>
               <TextInput v-model="editedAddress.streetAndNumber" label="streetAndNumber"
@@ -74,7 +79,8 @@ const emptyAddress = {
   zip: '',
   city: '',
   state: '',
-  country: ''
+  country: '',
+  email: ''
 }
 export default {
   name: "AddressEditor",

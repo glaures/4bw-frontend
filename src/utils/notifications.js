@@ -40,6 +40,7 @@ function showWarning(message) {
 }
 
 function handleError(err, silent) {
+    console.error(err)
     let msg = ''
     let type = 'danger'
     if (err.response) {
