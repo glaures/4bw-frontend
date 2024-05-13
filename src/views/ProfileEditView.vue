@@ -39,11 +39,11 @@
               <div v-else-if="locations.remote">Du trainierst ausschließlich remote.</div>
               <div v-else-if="locations.onsite">Du trainierst ausschließlich beim Kunden.</div>
             </div>
-            <div data-bs-toggle="modal" data-bs-target="#locationsSelectorModal" class="mt-3 text-end">
-              <button class="btn btn-primary btn-sm">
-                {{ $t('edit') }}
-              </button>
-            </div>
+          </div>
+          <div data-bs-toggle="modal" data-bs-target="#locationsSelectorModal" class="mt-3 text-end">
+            <button class="btn btn-primary btn-sm">
+              {{ $t('edit') }}
+            </button>
           </div>
         </div>
       </div>
