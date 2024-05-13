@@ -89,7 +89,7 @@ import LanguageFlag from "@/components/language/LanguageFlag.vue";
       <div class="btn btn-sm btn-primary" @click="saveSettings">Speichern</div>
     </div>
     <div class="text-end mt-2">
-      <router-link :to="{name: 'editProfile', params: {nameId: this.nameId}}">Profil-Einstellungen</router-link>
+      <router-link :to="{name: 'editProfile', params: {nameId: nameId}}">Profil-Einstellungen</router-link>
     </div>
   </div>
 </template>
@@ -111,43 +111,6 @@ export default {
   data() {
     return {
       homeData: null,
-      test: {
-        fresh: false,
-        settings: {
-          color1: "#C2095A",
-          color2: "#009fb7",
-          fontColor: "#FFFFFF"
-        },
-        user: {
-          name: "Guido Lauredds",
-          email: "guido@laures.de",
-          phone: "+40 151 22344688",
-          profilePicture: "web/avatars/kqka0j0seqrn9p5vogw7"
-        },
-        offers: [
-          {
-            name: "Strategieberatung",
-            description: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
-          },
-          {
-            name: "Strategieberatung",
-            description: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
-          }
-        ],
-        competencies: [
-          {
-            nameDE: "Künstliche Intelligenz",
-            nameEN: "Artificial Intelligence"
-          },
-          {
-            nameDE: "Data Analytics",
-            nameEN: "Data Analytics"
-          }
-        ],
-        languages: [
-          "Deutsch", "Englisch"
-        ]
-      }
     }
   },
   computed: {
