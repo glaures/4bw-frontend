@@ -71,7 +71,10 @@ export default {
         issuer: 'Issuer',
         issuedDate: 'Date issued',
         expirationDate: 'Expires',
-        email: 'Email'
+        email: 'Email',
+        cityPlaceholder: 'Berlin, München, Hamburg, ...',
+        yourLocations: 'Your service locations',
+        editYourLocations: 'Edit service locations'
     },
     de: {
         language_de: 'Deutsch',
@@ -145,6 +148,9 @@ export default {
         issuer: 'Herausgeber',
         issuedDate: 'Ausgabedatum',
         expirationDate: 'Läuft ab',
-        email: 'Email'
+        email: 'Email',
+        cityPlaceholder: 'Berlin, München, Hamburg, ...',
+        yourLocations: 'Dein Einsatzgebiet',
+        editYourLocations: 'Einsatzgebiet bearbeiten'
     }
 }

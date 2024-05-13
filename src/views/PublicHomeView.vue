@@ -72,17 +72,17 @@ import LanguageFlag from "@/components/language/LanguageFlag.vue";
   </main>
   <div class="settings-menu d-none" id="settings-menu" v-if="homeData?.settings && (nameId === user?.nameId)">
     <div class="format-group d-flex justify-content-between">
-      <div class="form-label me-2" for="#colorPicker1">Farbe 1</div>
+      <label class="form-label me-2" for="#colorPicker1">Farbe 1</label>
       <ColorPicker ref="colorPicker1" id="colorPicker1" class="form-control"
                    v-model:pure-color="homeData.settings.color1"
                    use-type="pure" lang="En"/>
     </div>
     <div class="format-group d-flex justify-content-between">
-      <div class="form-label me-2" for="#colorPicker2">Farbe 2</div>
+      <label class="form-label me-2" for="#colorPicker2">Farbe 2</label>
       <ColorPicker id="colorPicker2" class="form-control" v-model:pure-color="homeData.settings.color2"/>
     </div>
     <div class="format-group d-flex justify-content-between">
-      <div class="form-label me-2" for="#colorPicker2">Schrift</div>
+      <label class="form-label me-2" for="#colorPicker2">Schrift</label>
       <ColorPicker id="colorPicker2" class="form-control" v-model:pure-color="homeData.settings.fontColor"/>
     </div>
     <div class="text-end mt-2">
