@@ -119,6 +119,7 @@ const router = createRouter({
   ]
 })
 
+/*
 router.beforeEach((to, from, next) => {
   if (to.name === 'editProfile') {
     const loggedUser = authStore().user
@@ -132,5 +133,6 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+ */
 
 export default router

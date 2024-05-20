@@ -74,7 +74,9 @@ export default {
         email: 'Email',
         cityPlaceholder: 'Berlin, München, Hamburg, ...',
         yourLocations: 'Your service locations',
-        editYourLocations: 'Edit service locations'
+        editYourLocations: 'Edit service locations',
+        languages: 'Languages',
+        languageSelectorPlaceholder: 'English, Spanish, Chinese, ...'
     },
     de: {
         language_de: 'Deutsch',
@@ -151,6 +153,8 @@ export default {
         email: 'Email',
         cityPlaceholder: 'Berlin, München, Hamburg, ...',
         yourLocations: 'Dein Einsatzgebiet',
-        editYourLocations: 'Einsatzgebiet bearbeiten'
+        editYourLocations: 'Einsatzgebiet bearbeiten',
+        languages: 'Sprachen',
+        languageSelectorPlaceholder: 'Deutsch, Englisch, Spanisch, ...'
     }
 }

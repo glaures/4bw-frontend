@@ -110,8 +110,7 @@
             <div class="d-flex">
               <div v-for="l in about.languages"
                    :key="about.id + '_' + l.iso">
-                <AdvancedImage :cld-img="$cld.image('web/languages/' + l.iso)" height="16"
-                               class="me-1"/>
+                <span class="badge bg-primary me-1">{{ l[userLanguage] }}</span>
               </div>
             </div>
             <div data-bs-toggle="modal" data-bs-target="#languageSelectorModal" class="mt-2">
@@ -169,6 +168,7 @@ import CategorySelector from "@/components/category/CategorySelector.vue";
 import {AdvancedImage} from "@cloudinary/vue";
 import CertificateEditor from "@/components/certification/CertificationEditor.vue";
 import LocationsEditor from "@/components/locations/LocationsEditor.vue";
+import {getUserLanguage} from "@/utils/user-language";
 
 export default {
   components: {
@@ -188,6 +188,11 @@ export default {
       about: null,
       certifications: [],
       editedCertification: null
+    }
+  },
+  computed: {
+    userLanguage() {
+      return getUserLanguage()
     }
   },
   methods: {

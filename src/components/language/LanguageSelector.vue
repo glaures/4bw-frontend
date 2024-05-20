@@ -1,82 +1,99 @@
 <template>
-    <div>
-        <div class="row">
-            <div v-for="(l, idx) in availableLanguages" :key="l.id" class="col-md-6 col-3 me-3 mb-1">
-                <input class="form-check-input me-1" type="checkbox" @click="select(l, $event)"
-                       :checked="checkStates[idx]"
-                       :selected="checkStates[idx]"/>
-                <LanguageFlag :language="l" :height="23" class="me-1"/>
-                <span class="form-check-label">{{ $t('language_' + l.iso) }}</span>
-            </div>
-        </div>
-        <div class="d-flex mt-3 justify-content-end">
-            <button class="btn btn-primary" data-bs-dismiss="modal">{{ $t('ok') }}</button>
-        </div>
+  <div>
+    <div class="d-flex">
+      <div v-for="language in selectedLanguages"
+           :key="'selected' + language.id"
+           class="badge bg-primary me-1 mb-1"
+           @click="deselectLanguage(language)">
+        {{ language[userLanguage] }}
+        <font-awesome-icon class="ms-2" icon="fa-xmark"/>
+      </div>
     </div>
+    <div class="mt-3">
+      <input list="languages"
+             v-model="filter"
+             class="form-control"
+             :placeholder="$t('languageSelectorPlaceholder')"
+             @input="checkDatalistSelection"
+             @keydown.enter="selectLanguage"/>
+      <datalist id="languages">
+        <option :id="language.id"
+                v-for="language in filteredLanguages"
+                :key="language.id"
+                :value="language[userLanguage]"/>
+      </datalist>
+    </div>
+    <div class="d-flex mt-3 justify-content-end">
+      <button class="ms-1 btn btn-sm btn-primary" @click="$emit('update:modelValue', selectedLanguages)"
+              data-bs-dismiss="modal">
+        {{ $t('ok') }}
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
 import {api} from "@/4bw-api";
 import {handleError} from "@/utils/notifications";
-import {AdvancedImage} from "@cloudinary/vue";
-import LanguageFlag from "@/components/language/LanguageFlag.vue";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {getUserLanguage} from "@/utils/user-language";
 
 export default {
-    name: "LanguageSelector",
-    components: {LanguageFlag, AdvancedImage},
-    emits: ['update:modelValue'],
-    props: {
-        modelValue: Array
-    },
-    data() {
-        9
-        return {
-            availableLanguages: [],
-            checkStates: []
-        }
-    },
-    computed: {
-        initialized() {
-            return this.modelValue && this.availableLanguages
-        }
-    },
-    methods: {
-        loadAvailableLanguages() {
-            api.get('/configuration/languages')
-                .then(res => {
-                    this.availableLanguages = res.data
-                    this.updateCheckStates()
-                })
-                .catch(err => handleError(err))
-        },
-        select(language, event) {
-            this.checkStates[this.availableLanguages.indexOf(language)] = event.target.checked
-            this.$emit('update:modelValue', this.availableLanguages
-                .filter(al => this.checkStates[this.availableLanguages.indexOf(al)] === true))
-
-        },
-        updateCheckStates() {
-            if (this.initialized)
-                this.checkStates = this.availableLanguages
-                    .map(al => this.modelValue.findIndex(l => l.id === al.id) >= 0 ? true : false)
-        }
-    },
-    watch: {
-        modelValue: {
-            handler() {
-                this.updateCheckStates()
-            },
-            immediate: true
-        },
-        availableLanguages: {
-            handler() {
-                this.updateCheckStates()
-            }
-        }
-    },
-    mounted() {
-        this.loadAvailableLanguages();
+  name: "LanguageSelector",
+  components: {FontAwesomeIcon},
+  emits: ['update:modelValue'],
+  props: {
+    modelValue: Array
+  },
+  data() {
+    return {
+      selectedLanguages: [],
+      filter: '',
+      filteredLanguages: []
     }
+  },
+  computed: {
+    userLanguage() {
+      return getUserLanguage()
+    },
+  },
+  methods: {
+    updateLanguageList() {
+      api.get('/configuration/languages', {
+        params: {
+          filter: this.filter
+        }
+      }).then(res => {
+        this.filteredLanguages = res.data
+      }).catch(err => handleError(err))
+    },
+    checkDatalistSelection(e) {
+      let id = e.target.attributes['id'];
+      console.log(id + ' selected')
+      this.selectLanguage(id);
+    },
+    selectLanguage() {
+      const selectedLanguage = this.filteredLanguages.find(l => l[this.userLanguage] === this.filter)
+      console.log(this.filter + ": " + selectedLanguage + ' selected 2')
+      if (selectedLanguage) {
+        this.selectedLanguages.push(selectedLanguage)
+        this.filter = ''
+      } else
+        this.updateLanguageList()
+    },
+    deselectLanguage(language){
+      this.selectedLanguages.splice(this.selectedLanguages.indexOf(language), 1)
+    }
+  },
+  watch: {
+    modelValue: {
+      handler(newVal) {
+        if (newVal)
+          this.selectedLanguages = newVal
+      },
+      immediate: true
+    }
+  },
 }
 </script>
 

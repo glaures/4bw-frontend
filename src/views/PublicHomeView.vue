@@ -2,7 +2,9 @@
 import LiteYouTubeEmbed from 'vue-lite-youtube-embed'
 import 'vue-lite-youtube-embed/style.css'
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import LanguageFlag from "@/components/language/LanguageFlag.vue";
+import GMapMap from "@fawmi/vue-google-maps/src/components/map.vue";
+import GMapCluster from "@fawmi/vue-google-maps";
+import GMapMarker from "@fawmi/vue-google-maps";
 </script>
 
 <template>
@@ -59,14 +61,18 @@ import LanguageFlag from "@/components/language/LanguageFlag.vue";
         </div>
       </div>
       <div class="skills-panel main-gradient mt-5 text-white p-5">
-        <div class="h1 mb-3">Kompetenzen</div>
+        <div class="h1 mb-3">{{ $t('competencies') }}</div>
         <div v-for="competence in homeData.competencies">{{ competence.nameDE }}</div>
-        <div class="h1 mt-5">Sprachen</div>
-        <div class="d-flex">
-          <language-flag  v-for="language in homeData.about.languages"
-                          :key="'lang_flag_' + language.iso"
-                          :language="language" class="me-1"/>
+        <div class="h1 mt-5">{{ $t('languages') }}</div>
+        <div>
+          <div v-for="language in homeData.about.languages"
+               :key="'lang_' + language.id">
+            {{ language[userLanguage] }}
+          </div>
         </div>
+      </div>
+      <div>
+        Einsatzgebiete
       </div>
     </div>
   </main>
@@ -102,6 +108,7 @@ import {ColorPicker} from "vue3-colorpicker";
 import "vue3-colorpicker/style.css";
 import {mapState} from "pinia";
 import {authStore} from "@/stores/auth";
+import {getUserLanguage} from "@/utils/user-language";
 
 export default {
   components: {AdvancedImage, ColorPicker},
@@ -115,6 +122,9 @@ export default {
   },
   computed: {
     ...mapState(authStore, ['user']),
+    userLanguage() {
+      return getUserLanguage()
+    }
   },
   methods: {
     loadHomeData() {
