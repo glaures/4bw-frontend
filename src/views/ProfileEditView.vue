@@ -27,7 +27,7 @@
               <div>Städte, in denen Du trainierst:</div>
               <div class="badge rounded-pill text-bg-primary me-1" v-for="city in locations.cities"
                    :key="city + '_badge'">
-                <span>{{ city }}</span>
+                <span>{{ city.name }}</span>
               </div>
               <div class="text-muted" v-if="locations.cities.length === 0">Bearbeite Deine Einsatzgebiete durch den
                 Knopf unten.

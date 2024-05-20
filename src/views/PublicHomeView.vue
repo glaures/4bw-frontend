@@ -2,9 +2,6 @@
 import LiteYouTubeEmbed from 'vue-lite-youtube-embed'
 import 'vue-lite-youtube-embed/style.css'
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import GMapMap from "@fawmi/vue-google-maps/src/components/map.vue";
-import GMapCluster from "@fawmi/vue-google-maps";
-import GMapMarker from "@fawmi/vue-google-maps";
 </script>
 
 <template>
@@ -44,7 +41,7 @@ import GMapMarker from "@fawmi/vue-google-maps";
         <div class="h1">Über mich</div>
         {{ homeData.about.about }}
       </div>
-      <div class="video-panel mt-5 px-2">
+      <div class="video-panel mt-5 px-2" v-if="false">
         <LiteYouTubeEmbed
             id="L3j5jvqjj88"
             title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
@@ -72,7 +69,16 @@ import GMapMarker from "@fawmi/vue-google-maps";
         </div>
       </div>
       <div>
-        Einsatzgebiete
+        <div class="h3 mt-4">Einsatzgebiete</div>
+        <GoogleMap
+            v-if="homeData.locations.cities.length > 0"
+            api-key="AIzaSyANXKyB1vwtOfjQ2NCbeQiQUhj3DRkyZPc"
+            style="width: 100%; height: 500px"
+            :center="center"
+            :zoom="6"
+        >
+          <Marker v-for="city in homeData.locations.cities" :key="city.name" :options="{ position: {lat: city.lat, lng: city.lng}, label: city.name }" />
+        </GoogleMap>
       </div>
     </div>
   </main>
@@ -109,9 +115,10 @@ import "vue3-colorpicker/style.css";
 import {mapState} from "pinia";
 import {authStore} from "@/stores/auth";
 import {getUserLanguage} from "@/utils/user-language";
+import { GoogleMap, Marker } from 'vue3-google-map'
 
 export default {
-  components: {AdvancedImage, ColorPicker},
+  components: {AdvancedImage, ColorPicker, GoogleMap, Marker},
   props: {
     nameId: String
   },
@@ -124,6 +131,22 @@ export default {
     ...mapState(authStore, ['user']),
     userLanguage() {
       return getUserLanguage()
+    },
+    center() {
+      const cityCount = this.homeData.locations.cities.length
+      if(cityCount === 0)
+        return null
+      let latSum = 0
+      let lngSum = 0
+      for(let cIdx = 0; cIdx < cityCount; cIdx++){
+        const c = this.homeData.locations.cities[cIdx]
+        latSum += c.lat
+        lngSum +=c.lng
+      }
+      return {
+        lat: latSum / cityCount,
+        lng: lngSum / cityCount
+      }
     }
   },
   methods: {

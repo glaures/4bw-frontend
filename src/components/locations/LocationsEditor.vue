@@ -16,16 +16,15 @@
       <div>Städte, in denen Du trainierst</div>
       <div class="badge rounded-pill text-bg-primary me-1" v-for="city in locations.cities"
            :key="city + '_badge'">
-        <span>{{ city }}</span>
+        <span>{{ city.name }}</span>
         <fa-icon class="ms-1" icon="circle-xmark" @click="deselectCity(city)"/>
       </div>
       <div class="input-group mt-3">
         <input id="cityInput" list="cities" v-model="filter" class="form-control" @input="checkDatalistSelection"
                :placeholder="$t('cityPlaceholder')"
                @keydown.enter="selectCity"/>
-        <button class="btn btn-sm btn-secondary ms-1" @click="selectCity">{{ $t('add') }}</button>
         <datalist id="cities">
-          <option v-for="city in filteredCities" :key="city + '_option'" :value="city"/>
+          <option v-for="city in filteredCities" :key="city + '_option'" :value="city.name"/>
         </datalist>
       </div>
     </div>
@@ -64,31 +63,35 @@ export default {
   computed: {
     filteredCities() {
       return this.allCities
-          .filter(c => c.includes(this.filter))
-          .map(c => c + '\xa0')
+          .filter(c => c.name.includes(this.filter))
     }
   },
   methods: {
     loadAllCities() {
       api.get('/configuration/cities')
-          .then(res => this.allCities = res.data.map(c => c.name))
+          .then(res => this.allCities = res.data)
           .catch(err => handleError(err))
     },
     selectCity() {
-      let city = this.allCities.find(c => c === this.filter) || this.filter
-      this.locations.cities.push(city)
-      this.filter = ''
+      console.log("selectCity")
+      let city = this.allCities.find(c => c.name === this.filter)
+      if (city) {
+        this.locations.cities.push(city)
+        this.filter = ''
+      }
     },
     deselectCity(city) {
       this.locations.cities.splice(this.locations.cities.indexOf(city), 1)
     },
     checkDatalistSelection(e) {
+      console.log("checkSelection")
       let v = e.target.value;
       if (v.slice(-1) === '\xa0') {
+        console.log("selected")
         // selection
         this.filter = v.slice(0, -1)
-        this.selectCity();
       }
+      this.selectCity();
     }
   },
   watch: {
