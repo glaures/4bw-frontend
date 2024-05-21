@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 <template>
   <main v-if="homeData">
-    <div class="container">
+    <div class="container px-0">
       <div class="button-bar-top main-gradient p-2 shadow">
         <button class="btn btn-sm btn-outline-light">Kontakt</button>
         <button class="btn btn-sm btn-outline-light">Verfügbarkeit</button>
@@ -47,29 +47,58 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
             title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
         />
       </div>
-      <div class="offers-panel mt-5 px-4" v-if="homeData.offers">
-        <div class="h1">Mein Angebot</div>
+      <div class="offers-panel mt-5 px-4" v-if="homeData.offers?.length > 0">
+        <div class="h1 text-center">Mein Angebot</div>
         <div class="row mt-4">
-          <div class="col-12 col-md-6" v-for="offer in homeData.offers" :key="offer.id">
-            <div class="h5">{{ offer.name }}</div>
-            <div class="mt-2 offer-description" style="
+          <div class="col-12 col-md-6 offer p-0 rounded-top-3" v-for="offer in homeData.offers" :key="offer.id">
+            <div class="bg-color1 p-3 font-color1">{{ offer.name }}</div>
+            <div class="mt-2 offer-description p-2" style="
                    text-overflow: ellipsis;"><span v-html="offer.description"/></div>
           </div>
         </div>
       </div>
       <div class="skills-panel main-gradient mt-5 text-white p-5">
-        <div class="h1 mb-3">{{ $t('competencies') }}</div>
-        <div v-for="competence in homeData.competencies">{{ competence.nameDE }}</div>
-        <div class="h1 mt-5">{{ $t('languages') }}</div>
-        <div>
+        <div v-if="homeData.competencies?.length > 0">
+          <div class="h1 mb-3">{{ $t('competencies') }}</div>
+          <div v-for="competence in homeData.competencies">{{ competence.nameDE }}</div>
+        </div>
+        <div v-if="homeData.certifications?.length > 0">
+          <div class="h1 mt-5">{{ $t('certificatesAndLicenses') }}</div>
+          <div v-for="certification in homeData.certifications"
+               :key="'cert_' + certification.id">
+            {{ certification.name }}
+          </div>
+        </div>
+        <div v-if="homeData.about.languages.length > 0">
+          <div class="h1 mt-5">{{ $t('languages') }}</div>
           <div v-for="language in homeData.about.languages"
                :key="'lang_' + language.id">
             {{ language[userLanguage] }}
           </div>
         </div>
       </div>
-      <div>
-        <div class="h3 mt-4">Einsatzgebiete</div>
+      <div class="location-panel bg-color2 rounded-top-4 pt-3 mt-5 text-white">
+        <div class="row px-2 mb-2">
+          <div class="col-4 text-end">
+            Einsatzgebiet:
+          </div>
+          <div class="col-8 fw-bold">
+            <span v-if="homeData.locations.countrywide">deutschlandweit</span>
+            <span v-if="homeData.locations.cities.length > 0">
+              <span v-for="(city, idx) in homeData.locations.cities" :key="city.name">
+                {{ city.name + (idx < homeData.locations.cities.length - 1 ? ', ' : '') }}
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="row px-2 mb-2">
+          <div class="col-4 text-end">
+            Remote:
+          </div>
+          <div class="col-8 fw-bold" v-if="homeData.locations.remote">
+            ja
+          </div>
+        </div>
         <GoogleMap
             v-if="homeData.locations.cities.length > 0"
             api-key="AIzaSyANXKyB1vwtOfjQ2NCbeQiQUhj3DRkyZPc"
@@ -77,7 +106,8 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
             :center="center"
             :zoom="6"
         >
-          <Marker v-for="city in homeData.locations.cities" :key="city.name" :options="{ position: {lat: city.lat, lng: city.lng}, label: city.name }" />
+          <Marker v-for="city in homeData.locations.cities" :key="city.name"
+                  :options="{ position: {lat: city.lat, lng: city.lng}, label: city.name }"/>
         </GoogleMap>
       </div>
     </div>
@@ -115,7 +145,7 @@ import "vue3-colorpicker/style.css";
 import {mapState} from "pinia";
 import {authStore} from "@/stores/auth";
 import {getUserLanguage} from "@/utils/user-language";
-import { GoogleMap, Marker } from 'vue3-google-map'
+import {GoogleMap, Marker} from 'vue3-google-map'
 
 export default {
   components: {AdvancedImage, ColorPicker, GoogleMap, Marker},
@@ -134,14 +164,14 @@ export default {
     },
     center() {
       const cityCount = this.homeData.locations.cities.length
-      if(cityCount === 0)
+      if (cityCount === 0)
         return null
       let latSum = 0
       let lngSum = 0
-      for(let cIdx = 0; cIdx < cityCount; cIdx++){
+      for (let cIdx = 0; cIdx < cityCount; cIdx++) {
         const c = this.homeData.locations.cities[cIdx]
         latSum += c.lat
-        lngSum +=c.lng
+        lngSum += c.lng
       }
       return {
         lat: latSum / cityCount,
@@ -179,6 +209,19 @@ export default {
 .main-gradient {
   background-color: transparent;
   background-image: linear-gradient(90deg, v-bind('homeData?.settings.color1') 0%, v-bind('homeData?.settings.color2') 100%);
+  color: v-bind('homeData?.settings.fontColor');
+}
+
+.font-color1 {
+  color: v-bind('homeData?.settings.fontColor');
+}
+
+.bg-color1 {
+  background-color: v-bind('homeData?.settings.color1');
+}
+
+.bg-color2 {
+  background-color: v-bind('homeData?.settings.color2');
   color: v-bind('homeData?.settings.fontColor');
 }
 
@@ -222,13 +265,13 @@ export default {
 }
 
 .offers-panel {
+}
 
+.offer {
+  border: 1px solid v-bind('homeData?.settings.color1');
 }
 
 .offer-description {
-  max-height: 20vh;
-  overflow-y: hidden;
-  text-overflow: ellipsis;
 }
 
 .skills-panel {
