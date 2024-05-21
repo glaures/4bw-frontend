@@ -107,7 +107,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
             :zoom="6"
         >
           <Marker v-for="city in homeData.locations.cities" :key="city.name"
-                  :options="{ position: {lat: city.lat, lng: city.lng}, label: city.name }"/>
+                  :options="{ position: {lat: city.lat, lng: city.lng} }"/>
         </GoogleMap>
       </div>
     </div>
