@@ -3,7 +3,8 @@
     <label :for="inputId" class="form-label">{{ $t(label) }}</label>
     <input :type="type" :id="inputId" :name="inputId" class="form-control" :value="modelValue"
            @input="$emit('update:modelValue', $event.target.value)"
-           :autocomplete="autocomplete"/>
+           :autocomplete="autocomplete"
+           :required="required"/>
   </div>
 </template>
 
@@ -21,7 +22,8 @@ export default {
       type: String,
       default: "text"
     },
-    modelValue: String
+    modelValue: String,
+    required: Boolean
   },
   emits: ['update:modelValue'],
   computed: {

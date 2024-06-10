@@ -4,7 +4,10 @@
       <img src="@/assets/img/4bw-logo.svg" alt="Logo" height="23">
     </a>
     <div v-if="!loggedIn" class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-light btn-sm my-2 my-sm-0" @click="$router.push({name: 'signIn'})">
+      <button class="btn btn-outline-light btn-sm my-2 my-sm-0 me-1" @click="$router.push({name: 'login'})">
+        {{ $t('login') }}
+      </button>
+      <button class="btn btn-outline-light btn-sm my-2 my-sm-0" @click="$router.push({name: 'supplierRegistration'})">
         {{ $t('signUp') }}
       </button>
     </div>

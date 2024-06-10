@@ -14,6 +14,7 @@ import PlansOverviewView from "@/views/PlansOverviewView.vue";
 import SupplierDetailView from "@/views/SupplierDetailView.vue";
 import CheckoutView from "@/views/CheckoutView.vue";
 import PublicHomeView from "@/views/PublicHomeView.vue";
+import ConfirmRegistrationView from "@/views/ConfirmRegistrationView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -75,6 +76,12 @@ const router = createRouter({
       name: 'supplierRegistration',
       props: true,
       component: SupplierRegistrationView
+    },
+    {
+      path: '/confirm-registration/:code',
+      name: 'confirmRegistration',
+      props: true,
+      component: ConfirmRegistrationView
     },
     {
       path: '/search',

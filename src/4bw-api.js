@@ -39,6 +39,7 @@ function getAuthtoken() {
 
 function clearAuthtoken() {
     console.log('clearing token')
+    instance.defaults.headers.common['Authorization'] = null
     localStorage.removeItem(AUTHTOKEN_LOCAL_STORAGE_KEY)
 }
 

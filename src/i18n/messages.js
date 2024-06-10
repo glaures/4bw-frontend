@@ -72,11 +72,22 @@ export default {
         issuedDate: 'Date issued',
         expirationDate: 'Expires',
         email: 'Email',
+        emailConfirmed: 'Your email address has been confirmed.',
         cityPlaceholder: 'Berlin, München, Hamburg, ...',
         yourLocations: 'Your service locations',
         editYourLocations: 'Edit service locations',
         languages: 'Languages',
-        languageSelectorPlaceholder: 'English, Spanish, Chinese, ...'
+        languageSelectorPlaceholder: 'English, Spanish, Chinese, ...',
+        givenName: 'Given name',
+        familyName: 'Family name',
+        password: 'Password',
+        supplierRegistrationHeading: 'Register as Trainer',
+        register: 'Create Profile',
+        accountCreatedPleaseLogin: 'Welcome to 4BetterWork Please sign-in with your newly created account!',
+        login: 'Sign-in',
+        notAMember: 'Not a 4BetterWork member, yet?',
+        confirmingEmail: 'Confirming your email address ...',
+        linkedInSignUp: 'Signing you up or in using your LinkedIn profile'
     },
     de: {
         language_de: 'Deutsch',
@@ -150,11 +161,22 @@ export default {
         issuer: 'Herausgeber',
         issuedDate: 'Ausgabedatum',
         expirationDate: 'Läuft ab',
-        email: 'Email',
+        email: 'E-Mail',
+        emailConfirmed: 'Deine E-Mail-Adresse wurde bestätigt.',
         cityPlaceholder: 'Berlin, München, Hamburg, ...',
         yourLocations: 'Dein Einsatzgebiet',
         editYourLocations: 'Einsatzgebiet bearbeiten',
         languages: 'Sprachen',
-        languageSelectorPlaceholder: 'Deutsch, Englisch, Spanisch, ...'
+        languageSelectorPlaceholder: 'Deutsch, Englisch, Spanisch, ...',
+        givenName: 'Vorname',
+        familyName: 'Nachname',
+        password: 'Passwort',
+        supplierRegistrationHeading: 'Leg jetzt Dein Profil an',
+        register: 'Profil anlegen',
+        accountCreatedPleaseLogin: 'Herzlich willkommen bei 4BetterWork. Bitte melde Dich mit Deinem gerade erstellten Account an!',
+        login: 'Anmelden',
+        notAMember: 'Noch kein 4BetterWork Profil?',
+        confirmingEmail: 'Deine E-Mail-Adresse wird bestätigt...',
+        linkedInSignUp: 'Anmeldung mit LinkedIn Profil'
     }
 }

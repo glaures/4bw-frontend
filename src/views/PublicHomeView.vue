@@ -69,7 +69,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
             {{ certification.name }}
           </div>
         </div>
-        <div v-if="homeData.about.languages.length > 0">
+        <div v-if="homeData.about.languages?.length > 0">
           <div class="h1 mt-5">{{ $t('languages') }}</div>
           <div v-for="language in homeData.about.languages"
                :key="'lang_' + language.id">
@@ -77,7 +77,8 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
           </div>
         </div>
       </div>
-      <div class="location-panel bg-color2 rounded-top-4 pt-3 mt-5 text-white">
+      <div class="location-panel bg-color2 rounded-top-4 pt-3 mt-5 text-white"
+           v-if="homeData.locations">
         <div class="row px-2 mb-2">
           <div class="col-4 text-end">
             Einsatzgebiet:
@@ -112,7 +113,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
       </div>
     </div>
   </main>
-  <div class="settings-menu d-none" id="settings-menu" v-if="homeData?.settings && (nameId === user?.nameId)">
+  <div class="settings-menu" id="settings-menu" v-if="homeData?.settings && (nameId === user?.nameId)">
     <div class="format-group d-flex justify-content-between">
       <label class="form-label me-2" for="#colorPicker1">Farbe 1</label>
       <ColorPicker ref="colorPicker1" id="colorPicker1" class="form-control"

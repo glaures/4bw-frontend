@@ -13,9 +13,10 @@ export const authStore = defineStore('auth', {
         async login(authtoken) {
             this.authtoken = authtoken
             setAuthtoken(authtoken)
-            return await api.get('/users/me')
-                .then(res => this.user = res.data)
+            this.user = await api.get('/users/me')
+                .then(res => res.data)
                 .catch(err => handleError(err))
+            return this.user
         },
         async logout(){
             this.authtoken = null
