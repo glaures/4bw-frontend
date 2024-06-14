@@ -6,7 +6,7 @@
                        class="rounded-circle shadow"/>
       </div>
       <div class="flex-fill ms-1 ms-lg-2">
-        <div class="h1">{{ user.givenName }} {{ user.familyName }}</div>{{mayEdit}}
+        <div class="h1">{{ user.givenName }} {{ user.familyName }}</div>
         <div class="mt-2">
           <AboutEditor :value="about" :readOnly="!mayEdit" @save="updateAbout"/>
         </div>
