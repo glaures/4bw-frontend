@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="card-body">
-      <div v-if="isEmpty" class="row text-muted">
+      <div v-if="isEmpty && !readOnly" class="row text-muted" >
         <div class="col">
           <span class="action-link" data-bs-toggle="modal" data-bs-target="#addressEditorModal"><fa-icon icon="plus"
                                                                                                          class="me-1"/>{{
@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-12">{{ editedAddress.country }}</div>
         </div>
-        <span class="action-link small" data-bs-toggle="modal" data-bs-target="#addressEditorModal">{{
+        <span v-if="!readOnly" class="action-link small" data-bs-toggle="modal" data-bs-target="#addressEditorModal">{{
             $t('edit')
           }}</span>
       </div>
@@ -87,7 +87,11 @@ export default {
   components: {TextInput, Form},
   props: {
     id: String,
-    userId: String
+    userId: String,
+    readOnly: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {

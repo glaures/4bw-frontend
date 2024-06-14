@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div v-if="!readOnly">
         <span class="action-link" @click="addContact"><fa-icon icon="fa-plus"
                                                                class="me-1"/>{{ $t('addProfile') }}</span>
       </div>
@@ -49,6 +49,7 @@ import {api} from "@/4bw-api";
 import {handleError, showInfo} from "@/utils/notifications";
 import TextInput from "@/components/forms/TextInput.vue";
 import {vue3Debounce} from "vue-debounce";
+import {read} from "@popperjs/core";
 
 export default {
   name: "SocialContactsEditor",
@@ -57,7 +58,11 @@ export default {
     debounce: vue3Debounce({lock: false})
   },
   props: {
-    userId: String
+    userId: String,
+    readOnly: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -71,6 +76,9 @@ export default {
     }
   },
   methods: {
+    read() {
+      return read
+    },
     addContact() {
       this.socialContacts.push({
         id: 'new' + this.socialContacts.length

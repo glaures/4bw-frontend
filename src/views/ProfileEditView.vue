@@ -6,21 +6,21 @@
                        class="rounded-circle shadow"/>
       </div>
       <div class="flex-fill ms-1 ms-lg-2">
-        <div class="h1">{{ user.givenName }} {{ user.familyName }}</div>
+        <div class="h1">{{ user.givenName }} {{ user.familyName }}</div>{{mayEdit}}
         <div class="mt-2">
-          <AboutEditor :value="about" @save="updateAbout"/>
+          <AboutEditor :value="about" :readOnly="!mayEdit" @save="updateAbout"/>
         </div>
       </div>
     </div>
     <div class="mt-3">
-      <AddressEditor :user-id="user.id"/>
+      <AddressEditor :user-id="user.id" :readOnly="!mayEdit"/>
     </div>
     <div class="mt-2">
-      <SocialContactsEditor :user-id="user.id"/>
+      <SocialContactsEditor :user-id="user.id" :readOnly="!mayEdit"/>
     </div>
     <div class="mt-3">
       <div class="card">
-        <div class="card-header">{{ $t('yourLocations') }}</div>
+        <div class="card-header">{{ $t('locations') }}</div>
         <div class="card-body">
           <div v-if="locations">
             <div v-if="!locations.countrywide">
@@ -40,7 +40,7 @@
               <div v-else-if="locations.onsite">Du trainierst ausschließlich beim Kunden.</div>
             </div>
           </div>
-          <div data-bs-toggle="modal" data-bs-target="#locationsSelectorModal" class="mt-3 text-end">
+          <div v-if="mayEdit" data-bs-toggle="modal" data-bs-target="#locationsSelectorModal" class="mt-3 text-end">
             <button class="btn btn-primary btn-sm">
               {{ $t('edit') }}
             </button>
@@ -56,7 +56,7 @@
                :key="category.id">
             <span>{{ category.nameDE }}</span>
           </div>
-          <div data-bs-toggle="modal" data-bs-target="#categorySelectorModal" class="mt-2">
+          <div v-if="mayEdit" data-bs-toggle="modal" data-bs-target="#categorySelectorModal" class="mt-2">
              <span class="action-link">
                <fa-icon icon="fa-plus" class="me-1"/>{{ $t('editCompetencies') }}
              </span>
@@ -169,6 +169,8 @@ import {AdvancedImage} from "@cloudinary/vue";
 import CertificateEditor from "@/components/certification/CertificationEditor.vue";
 import LocationsEditor from "@/components/locations/LocationsEditor.vue";
 import {getUserLanguage} from "@/utils/user-language";
+import {mapState} from "pinia";
+import {authStore} from "@/stores/auth";
 
 export default {
   components: {
@@ -193,6 +195,9 @@ export default {
   computed: {
     userLanguage() {
       return getUserLanguage()
+    },
+    mayEdit(){
+      return this.nameId ===  authStore().user?.nameId
     }
   },
   methods: {
@@ -268,6 +273,12 @@ export default {
           .then(res => this.about = res.data)
           .catch(err => handleError(err))
     },
+  },
+  watch: {
+    nameId(newVal){
+      if(newVal)
+        this.loadUser()
+    }
   },
   activated() {
     this.loadUser()
