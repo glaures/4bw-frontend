@@ -42,11 +42,14 @@ export default {
   },
   computed: {
     filteredCategories() {
+      var localeUpper = this.$i18n.locale.toUpperCase()
+      if(localeUpper !== 'DE' && localeUpper !== 'EN')
+        localeUpper = 'EN'
       return this.allCategories
-          .filter(c => c.nameDE.includes(this.filter))
+          .filter(c => c['name' + localeUpper].toLowerCase().includes(this.filter.toLowerCase()))
           .map(c => {
             let cNew = {...c}
-            cNew.nameDE = c.nameDE + '\xa0'
+            cNew['name' + localeUpper] = c['name' + localeUpper] + '\xa0'
             return cNew
           })
     }
