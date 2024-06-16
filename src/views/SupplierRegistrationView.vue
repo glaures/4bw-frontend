@@ -11,6 +11,8 @@
       <div class="text-end mt-3">
         <button class="btn btn-primary" type="submit" @submit.prevent="register">{{ $t('register') }}</button>
       </div>
+      <hr/>
+      <LinkedInSignIn/>
     </form>
   </div>
 </template>
@@ -22,10 +24,11 @@ import {handleError, showInfo} from "@/utils/notifications";
 import TextInput from "@/components/forms/TextInput.vue";
 import {mapActions, mapState} from "pinia";
 import {authStore} from "@/stores/auth";
+import LinkedInSignIn from "@/components/linkedin/LinkedInSignIn.vue";
 
 export default {
   name: "SupplierRegistration",
-  components: {TextInput},
+  components: {LinkedInSignIn, TextInput},
   data() {
     return {
       givenName: '',

@@ -87,7 +87,8 @@ export default {
         login: 'Sign-in',
         notAMember: 'Not a 4BetterWork member, yet?',
         confirmingEmail: 'Confirming your email address ...',
-        linkedInSignUp: 'Signing you up or in using your LinkedIn profile'
+        linkedInSignUp: 'Signing you up or in using your LinkedIn profile',
+        askingAi: 'Searching best trainings ...'
     },
     de: {
         language_de: 'Deutsch',
@@ -177,6 +178,7 @@ export default {
         login: 'Anmelden',
         notAMember: 'Noch kein 4BetterWork Profil?',
         confirmingEmail: 'Deine E-Mail-Adresse wird bestätigt...',
-        linkedInSignUp: 'Anmeldung mit LinkedIn Profil'
+        linkedInSignUp: 'Anmeldung mit LinkedIn Profil',
+        askingAi: 'Suche passende Trainings ...'
     }
 }

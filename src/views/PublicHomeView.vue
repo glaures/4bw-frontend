@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 <template>
   <main v-if="homeData">
     <div class="container px-0">
-      <div class="button-bar-top main-gradient p-2 shadow">
+      <div v-if="false" class="button-bar-top main-gradient p-2 shadow">
         <button class="btn btn-sm btn-outline-light">Kontakt</button>
         <button class="btn btn-sm btn-outline-light">Verfügbarkeit</button>
       </div>
@@ -23,8 +23,8 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
           <div v-if="homeData.about" class="h4 px-3">{{ homeData.about.headline }}</div>
         </div>
         <div class="mt-5 text-center">
-          <div>Email: <span class="fw-bold">{{ homeData.user.email }}</span></div>
-          <div class="mt-1" v-if="homeData.address">Phone: <span class="fw-bold">{{ homeData.address.phone }}</span>
+          <div v-if="homeData.address.email">Email: <span class="fw-bold">{{ homeData.address.email }}</span></div>
+          <div class="mt-1" v-if="homeData.address.phone">Phone: <span class="fw-bold">{{ homeData.address.phone }}</span>
           </div>
           <div class="mt-1" v-if="homeData.about.website"><a :href="homeData.about.website"
                                                              class="fw-bold link">{{ homeData.about.website }}</a></div>
@@ -57,7 +57,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
           </div>
         </div>
       </div>
-      <div class="skills-panel main-gradient mt-5 text-white p-5">
+      <div class="skills-panel main-gradient mt-5 p-5">
         <div v-if="homeData.competencies?.length > 0">
           <div class="h1 mb-3">{{ $t('competencies') }}</div>
           <div v-for="competence in homeData.competencies">{{ competence.nameDE }}</div>
@@ -77,7 +77,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
           </div>
         </div>
       </div>
-      <div class="location-panel bg-color2 rounded-top-4 pt-3 mt-5 text-white"
+      <div class="location-panel bg-color2 rounded-top-4 pt-3 mt-5"
            v-if="homeData.locations">
         <div class="row px-2 mb-2">
           <div class="col-4 text-end">

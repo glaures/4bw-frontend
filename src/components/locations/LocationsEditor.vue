@@ -63,7 +63,7 @@ export default {
   computed: {
     filteredCities() {
       return this.allCities
-          .filter(c => c.name.includes(this.filter))
+          .filter(c => c.name.toLowerCase().includes(this.filter.toLowerCase()))
     }
   },
   methods: {
