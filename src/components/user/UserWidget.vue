@@ -1,11 +1,22 @@
 <script>
 import {AdvancedImage} from "@cloudinary/vue";
+import {getUserLanguage} from "@/utils/user-language";
 
 export default {
   name: "UserWidget",
   components: {AdvancedImage},
   props: {
-    user: Object
+    user: Object,
+    filterCompetencies: Array
+  },
+  computed: {
+    language(){
+      return getUserLanguage().toUpperCase()
+    },
+    filteredCompetencies(){
+      const fIds = this.filterCompetencies.map(c => c.id)
+      return this.user.competencies.filter(c => fIds.indexOf(c.id) >= 0)
+    }
   }
 }
 </script>
@@ -21,8 +32,8 @@ export default {
         {{ user.name }}
       </div>
     </div>
-    <div>
-      <span v-for="c in user.competencies">{{c.nameDE}}</span>
+    <div class="d-flex text-primary mt-1">
+      <div v-for="c in filteredCompetencies" :key="c.id">{{c['name' + this.language]}}</div>
     </div>
   </div>
 </template>

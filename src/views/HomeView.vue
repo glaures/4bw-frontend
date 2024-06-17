@@ -10,7 +10,7 @@
                               :placeholder="$t('describeProblem')"/>
         </div>
         <button class="btn btn-primary mt-2" @click="searchWithAi" :disabled="aiPrompt.length < 15">
-          TrainerInnen finden
+          {{$t('findTrainings')}}
         </button>
       </div>
       <div class="mt-4 px-2 mb-5">
@@ -26,7 +26,7 @@
             <div class="row">
               <div v-for="user in foundUsers" :key="user.id" class="col-6 col-md-6 mt-2"
                    @click="$router.push({name: 'supplierDetail', params: {id: user.id}})">
-                <UserWidget :user="user"/>
+                <UserWidget :user="user" :filterCompetencies="aiResponse.categories"/>
               </div>
             </div>
           </div>
