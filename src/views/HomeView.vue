@@ -24,8 +24,7 @@
           <div class="mt-3">
             <div class="mt-2 mb-2 fw-bold">Wir haben diese Trainer für Dich gefunden:</div>
             <div class="row">
-              <div v-for="user in foundUsers" :key="user.id" class="col-6 col-md-6 mt-2"
-                   @click="$router.push({name: 'supplierDetail', params: {id: user.id}})">
+              <div v-for="user in foundUsers" :key="user.id" class="col-6 col-md-6 mt-2">
                 <UserWidget :user="user" :filterCompetencies="aiResponse.categories"/>
               </div>
             </div>

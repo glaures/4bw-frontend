@@ -24,7 +24,9 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
         </div>
         <div class="mt-5 text-center">
           <div v-if="homeData.address.email">Email: <span class="fw-bold">{{ homeData.address.email }}</span></div>
-          <div class="mt-1" v-if="homeData.address.phone">Phone: <span class="fw-bold">{{ homeData.address.phone }}</span>
+          <div class="mt-1" v-if="homeData.address.phone">Phone: <span class="fw-bold">{{
+              homeData.address.phone
+            }}</span>
           </div>
           <div class="mt-1" v-if="homeData.about.website"><a :href="homeData.about.website"
                                                              class="fw-bold link">{{ homeData.about.website }}</a></div>
@@ -47,29 +49,34 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
             title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
         />
       </div>
-      <div class="offers-panel mt-5 px-4" v-if="homeData.offers?.length > 0">
+      <div class="offers-panel mt-5 px-1" v-if="homeData.offers?.length > 0">
         <div class="h1 text-center">Mein Angebot</div>
         <div class="row mt-4">
-          <div class="col-12 col-md-6 offer p-0 rounded-top-3" v-for="offer in homeData.offers" :key="offer.id">
-            <div class="bg-color1 p-3 font-color1">{{ offer.name }}</div>
-            <div class="mt-2 offer-description p-2" style="
+          <div class="col-12"
+               :class="{'col-md-6': index !== homeData.offers.length - 1 || index % 2 === 1}"
+               v-for="(offer, index) in homeData.offers"
+               :key="offer.id">
+            <div class="offer my-1 mx-md-1 rounded-top-3">
+              <div class="bg-color1 p-3 font-color1">{{ offer.name }}</div>
+              <div class="mt-2 offer-description p-2" style="
                    text-overflow: ellipsis;"><span v-html="offer.description"/></div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="skills-panel main-gradient mt-5 p-5">
-        <div v-if="homeData.competencies?.length > 0">
+      <div class="skills-panel main-gradient mt-5 p-5 row">
+        <div v-if="homeData.competencies?.length > 0" class="col-12 col-md-6">
           <div class="h1 mb-3">{{ $t('competencies') }}</div>
           <div v-for="competence in homeData.competencies">{{ competence.nameDE }}</div>
         </div>
-        <div v-if="homeData.certifications?.length > 0">
-          <div class="h1 mt-5">{{ $t('certificatesAndLicenses') }}</div>
+        <div v-if="homeData.certifications?.length > 0" class="col-12 col-md-6">
+          <div class="h1 mb-3">{{ $t('certificatesAndLicenses') }}</div>
           <div v-for="certification in homeData.certifications"
                :key="'cert_' + certification.id">
             {{ certification.name }}
           </div>
         </div>
-        <div v-if="homeData.about.languages?.length > 0">
+        <div v-if="homeData.about.languages?.length > 0" class="col-12 col-md-6">
           <div class="h1 mt-5">{{ $t('languages') }}</div>
           <div v-for="language in homeData.about.languages"
                :key="'lang_' + language.id">
