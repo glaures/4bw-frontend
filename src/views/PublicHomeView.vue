@@ -65,19 +65,19 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
         </div>
       </div>
       <div class="skills-panel main-gradient mt-5 p-5 row">
-        <div v-if="homeData.competencies?.length > 0" class="col-12 col-md-6">
-          <div class="h1 mb-3">{{ $t('competencies') }}</div>
+        <div v-if="homeData.competencies?.length > 0" class="col-12 col-md-6 mb-2">
+          <div class="h1 mb-1">{{ $t('competencies') }}</div>
           <div v-for="competence in homeData.competencies">{{ competence.nameDE }}</div>
         </div>
-        <div v-if="homeData.certifications?.length > 0" class="col-12 col-md-6">
-          <div class="h1 mb-3">{{ $t('certificatesAndLicenses') }}</div>
+        <div v-if="homeData.certifications?.length > 0" class="col-12 col-md-6 mb-2">
+          <div class="h1 mb-1">{{ $t('certificatesAndLicenses') }}</div>
           <div v-for="certification in homeData.certifications"
                :key="'cert_' + certification.id">
             {{ certification.name }}
           </div>
         </div>
-        <div v-if="homeData.about.languages?.length > 0" class="col-12 col-md-6">
-          <div class="h1 mt-5">{{ $t('languages') }}</div>
+        <div v-if="homeData.about.languages?.length > 0" class="col-12 col-md-6 mb-2">
+          <div class="h1 mb-1">{{ $t('languages') }}</div>
           <div v-for="language in homeData.about.languages"
                :key="'lang_' + language.id">
             {{ language[userLanguage] }}
